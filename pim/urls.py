@@ -21,5 +21,6 @@ from clinicaMedica import views
 urlpatterns = [
     path("", views.index, name="index"),
     path('admin/', admin.site.urls),
-    path("login", views.index, name='login')
+    path("login/", views.index, name='login'),
+    path('primeiro-acesso/', views.primeiro_acesso, name='primeiro_acesso'),
 ]

@@ -9,12 +9,14 @@ class Funcionario(models.Model):
     salario = models.DecimalField(max_digits=10, decimal_places=2)
     cargo = models.CharField(max_length=50)
     nome = models.CharField(max_length=50)
-    senha = models.CharField(max_length=128, null=True)
+    senha = models.CharField(max_length=128, null=True, blank=True)
+    is_first_login = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
-        if self.senha and not self.senha.startswith("pbkdf2_"):
+        if self.senha and not self.senha.startswith('pbkdf2_sha256$'):
             self.senha = make_password(self.senha)
         super().save(*args, **kwargs)
+
     
     class Meta:
         abstract = True
