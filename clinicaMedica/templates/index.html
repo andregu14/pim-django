@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Dashboard - OdontoSmart</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Arquivos CSS do Vendor -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <!-- Arquivo CSS Principal do Template -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+
+    <!-- =======================================================
+  * Nome do Template: NiceAdmin
+  * URL do Template: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Atualizado: 20 de abril de 2024 com Bootstrap v5.3.3
+  * Autor: BootstrapMade.com
+  * Licença: https://bootstrapmade.com/license/
+  ======================================================== -->
+  </head>
+
+  <body>
+    <!-- ======= Cabeçalho ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="assets/img/logo.png" alt="" />
+          <span class="d-none d-lg-block">OdontoSmart</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
+      <!-- Fim do Logo -->
+
+      <div class="search-bar">
+        <form
+          class="search-form d-flex align-items-center"
+          method="POST"
+          action="#"
+        >
+          <input
+            type="text"
+            name="query"
+            placeholder="Pesquisar"
+            title="Pesquisar"
+          />
+          <button type="submit" title="Pesquisar">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
+      <!-- Fim da Barra de Pesquisa -->
+
+      <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+          <li class="nav-item d-block d-lg-none">
+            <a class="nav-link nav-icon search-bar-toggle" href="#">
+              <i class="bi bi-search"></i>
+            </a>
+          </li>
+          <!-- Fim do Ícone de Pesquisa -->
+
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-bell"></i>
+              <span class="badge bg-primary badge-number">4</span> </a
+            ><!-- Fim do Ícone de Notificações -->
+
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
+            >
+              <li class="dropdown-header">
+                Você tem 4 novas notificações
+                <a href="#"
+                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                    >Ver todas</span
+                  ></a
+                >
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li class="notification-item">
+                <i class="bi bi-exclamation-circle text-warning"></i>
+                <div>
+                  <h4>Agendamento Pendente</h4>
+                  <p>Paciente João Silva agendou uma consulta.</p>
+                  <p>Há 30 min.</p>
+                </div>
+              </li>
+
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li class="notification-item">
+                <i class="bi bi-x-circle text-danger"></i>
+                <div>
+                  <h4>Consulta Cancelada</h4>
+                  <p>Paciente Maria Oliveira cancelou a consulta.</p>
+                  <p>Há 1 hora.</p>
+                </div>
+              </li>
+
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li class="notification-item">
+                <i class="bi bi-check-circle text-success"></i>
+                <div>
+                  <h4>Exame Concluído</h4>
+                  <p>Exame de Carlos Santos disponível.</p>
+                  <p>Há 2 horas.</p>
+                </div>
+              </li>
+
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li class="notification-item">
+                <i class="bi bi-info-circle text-primary"></i>
+                <div>
+                  <h4>Nova Mensagem</h4>
+                  <p>Mensagem de Dr. Pedro Ferreira.</p>
+                  <p>Há 4 horas.</p>
+                </div>
+              </li>
+
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li class="dropdown-footer">
+                <a href="#">Mostrar todas as notificações</a>
+              </li>
+            </ul>
+          </li>
+          <!-- Fim da Navegação de Notificações -->
+
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-chat-left-text"></i>
+              <span class="badge bg-success badge-number">3</span> </a
+            ><!-- Fim do Ícone de Mensagens -->
+
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages"
+            >
+              <li class="dropdown-header">
+                Você tem 3 novas mensagens
+                <a href="#"
+                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                    >Ver todas</span
+                  ></a
+                >
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li class="message-item">
+                <a href="#">
+                  <img
+                    src="assets/img/messages-1.jpg"
+                    alt=""
+                    class="rounded-circle"
+                  />
+                  <div>
+                    <h4>Maria Hudson</h4>
+                    <p>Olá, gostaria de discutir o projeto com você.</p>
+                    <p>Há 4 horas</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li class="message-item">
+                <a href="#">
+                  <img
+                    src="assets/img/messages-2.jpg"
+                    alt=""
+                    class="rounded-circle"
+                  />
+                  <div>
+                    <h4>Anna Nelson</h4>
+                    <p>Poderia revisar o documento que enviei?</p>
+                    <p>Há 6 horas</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li class="message-item">
+                <a href="#">
+                  <img
+                    src="assets/img/messages-3.jpg"
+                    alt=""
+                    class="rounded-circle"
+                  />
+                  <div>
+                    <h4>David Muldon</h4>
+                    <p>Não esqueça da reunião amanhã às 9h.</p>
+                    <p>Há 8 horas</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li class="dropdown-footer">
+                <a href="#">Mostrar todas as mensagens</a>
+              </li>
+            </ul>
+            <!-- Fim dos Itens do Dropdown de Mensagens -->
+          </li>
+          <!-- Fim da Navegação de Mensagens -->
+
+          <li class="nav-item dropdown pe-3">
+            <a
+              class="nav-link nav-profile d-flex align-items-center pe-0"
+              href="#"
+              data-bs-toggle="dropdown"
+            >
+              <img
+                src="assets/img/profile-img.jpg"
+                alt="Perfil"
+                class="rounded-circle"
+              />
+              <span class="d-none d-md-block dropdown-toggle ps-2"
+                >Grupo 3</span
+              > </a
+            ><!-- Fim do Ícone de Imagem de Perfil -->
+
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
+            >
+              <li class="dropdown-header">
+                <h6>Grupo 3</h6>
+                <span>PIM</span>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="users-profile.html"
+                >
+                  <i class="bi bi-person"></i>
+                  <span>Meu Perfil</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="users-profile.html"
+                >
+                  <i class="bi bi-gear"></i>
+                  <span>Configurações</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="pages-faq.html"
+                >
+                  <i class="bi bi-question-circle"></i>
+                  <span>Precisa de ajuda?</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Sair</span>
+                </a>
+              </li>
+            </ul>
+            <!-- Fim dos Itens do Dropdown de Perfil -->
+          </li>
+          <!-- Fim da Navegação de Perfil -->
+        </ul>
+      </nav>
+      <!-- Fim da Navegação de Ícones -->
+    </header>
+    <!-- Fim do Cabeçalho -->
+
+    <!-- ======= Barra Lateral ======= -->
+    <aside id="sidebar" class="sidebar">
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <!-- Fim da Navegação do Dashboard -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="users-profile.html">
+            <i class="bi bi-person"></i>
+            <span>Perfil</span>
+          </a>
+        </li>
+        <!-- Fim da Navegação da Página de Perfil -->
+
+        <li class="nav-item">
+          <a
+            href="#"
+            class="nav-link collapsed"
+            data-bs-target="#consultas-nav"
+            data-bs-toggle="collapse"
+          >
+            <i class="bi bi-calendar"></i><span>Consultas</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="consultas-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a href="#">
+                <i class="bi bi-circle-fill"></i>
+                <span>Visualizar Consultas</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="bi bi-circle-fill"></i>
+                <span>Marcar Consultas</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Fim da Navegação do menu de consultas-->
+        <li class="nav-item">
+          <a
+            href="#"
+            class="nav-link collapsed"
+            data-bs-target="#pacientes-nav"
+            data-bs-toggle="collapse"
+          >
+            <i class="bi bi-people"></i><span>Pacientes</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="pacientes-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a href="procurar-paciente.html">
+                <i class="bi bi-circle-fill"></i>
+                <span>Procurar Paciente</span>
+              </a>
+            </li>
+            <li>
+              <a href="cadastrar-paciente.html">
+                <i class="bi bi-circle-fill"></i>
+                <span>Cadastrar Paciente</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- Fim da Navegação do menu de paciente-->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="pages.funcionario.html">
+            <i class="bi bi-briefcase"></i>
+            <span>Funcionários</span>
+          </a>
+        </li>
+        <!-- Fim da Navegação da Página de Perfil -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="pages-faq.html">
+            <i class="bi bi-question-circle"></i>
+            <span>Perguntas Frequentes</span>
+          </a>
+        </li>
+        <!-- Fim da Navegação da Página de Perguntas Frequentes -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="pages-contact.html">
+            <i class="bi bi-envelope"></i>
+            <span>Contato</span>
+          </a>
+        </li>
+        <!-- Fim da Navegação da Página de Contato -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="primeiro-acesso.html">
+            <i class="bi bi-card-list"></i>
+            <span>Primeiro Acesso</span>
+          </a>
+        </li>
+        <!-- Fim da Navegação da Página de Registros -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="pages-login.html">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Login</span>
+          </a>
+        </li>
+        <!-- Fim da Navegação da Página de Login -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="pages-error-404.html">
+            <i class="bi bi-dash-circle"></i>
+            <span>Erro 404</span>
+          </a>
+        </li>
+        <!-- Fim da Navegação da Página de Erro 404 -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="pages-login.html">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Sair</span>
+          </a>
+        </li>
+        <!-- Fim da Navegação Sair -->
+      </ul>
+    </aside>
+    <!-- Fim da Barra Lateral-->
+
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Início</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+          </ol>
+        </nav>
+      </div>
+      <!-- Fim do Título da Página -->
+
+      <section class="section dashboard">
+        <div class="row">
+          <!-- Colunas do lado esquerdo -->
+          <div class="col-lg-8">
+            <div class="row">
+              <!-- Cartão de Consultas -->
+              <div class="col-xxl-4 col-md-6">
+                <div class="card info-card sales-card">
+                  <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"
+                      ><i class="bi bi-three-dots"></i
+                    ></a>
+                    <ul
+                      class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
+                    >
+                      <li class="dropdown-header text-start">
+                        <h6>Filtro</h6>
+                      </li>
+
+                      <li><a class="dropdown-item" href="#">Hoje</a></li>
+                      <li><a class="dropdown-item" href="#">Este Mês</a></li>
+                      <li><a class="dropdown-item" href="#">Este Ano</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="card-body">
+                    <h5 class="card-title">Consultas <span>| Hoje</span></h5>
+
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                      >
+                        <i class="bi bi-clipboard2-pulse-fill"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>145</h6>
+                        <span class="text-success small pt-1 fw-bold">12%</span>
+                        <span class="text-muted small pt-2 ps-1">aumento</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Fim do Cartão de Vendas -->
+
+              <!-- Cartão de Receita -->
+              <div class="col-xxl-4 col-md-6">
+                <div class="card info-card revenue-card">
+                  <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"
+                      ><i class="bi bi-three-dots"></i
+                    ></a>
+                    <ul
+                      class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
+                    >
+                      <li class="dropdown-header text-start">
+                        <h6>Filtro</h6>
+                      </li>
+
+                      <li><a class="dropdown-item" href="#">Hoje</a></li>
+                      <li><a class="dropdown-item" href="#">Este Mês</a></li>
+                      <li><a class="dropdown-item" href="#">Este Ano</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="card-body">
+                    <h5 class="card-title">Receita <span>| Setembro</span></h5>
+
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                      >
+                        <i class="bi bi-currency-dollar"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>$3.264</h6>
+                        <span class="text-success small pt-1 fw-bold">8%</span>
+                        <span class="text-muted small pt-2 ps-1">aumento</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Fim do Cartão de Receita -->
+
+              <!-- Cartão de Pacientes -->
+              <div class="col-xxl-4 col-xl-12">
+                <div class="card info-card customers-card">
+                  <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"
+                      ><i class="bi bi-three-dots"></i
+                    ></a>
+                    <ul
+                      class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
+                    >
+                      <li class="dropdown-header text-start">
+                        <h6>Filtro</h6>
+                      </li>
+
+                      <li><a class="dropdown-item" href="#">Hoje</a></li>
+                      <li><a class="dropdown-item" href="#">Este Mês</a></li>
+                      <li><a class="dropdown-item" href="#">Este Ano</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="card-body">
+                    <h5 class="card-title">Pacientes <span>| 2024</span></h5>
+
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                      >
+                        <i class="bi bi-people-fill"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>1.244</h6>
+                        <span class="text-danger small pt-1 fw-bold">12%</span>
+                        <span class="text-muted small pt-2 ps-1">redução</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Fim do Cartão de Pacientes -->
+
+              <!-- Relatórios -->
+              <div class="col-12">
+                <div class="card">
+                  <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"
+                      ><i class="bi bi-three-dots"></i
+                    ></a>
+                    <ul
+                      class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
+                    >
+                      <li class="dropdown-header text-start">
+                        <h6>Filtro</h6>
+                      </li>
+
+                      <li><a class="dropdown-item" href="#">Hoje</a></li>
+                      <li><a class="dropdown-item" href="#">Este Mês</a></li>
+                      <li><a class="dropdown-item" href="#">Este Ano</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      Relatório <span id="data-atual"></span>
+                    </h5>
+
+                    <script>
+                      // Função para formatar a data como dd/mm/aaaa
+                      function formatarData(data) {
+                        const dia = String(data.getDate()).padStart(2, "0");
+                        const mes = String(data.getMonth() + 1).padStart(
+                          2,
+                          "0"
+                        ); // Janeiro é 0!
+                        const ano = data.getFullYear();
+                        return `${dia}/${mes}/${ano}`;
+                      }
+
+                      // Obter a data atual
+                      const dataAtual = new Date();
+
+                      // Atualizar o conteúdo do span com a data formatada
+                      document.getElementById(
+                        "data-atual"
+                      ).textContent = `| ${formatarData(dataAtual)}`;
+                    </script>
+
+                    <!-- Gráfico de Linha -->
+                    <div id="reportsChart"></div>
+
+                    <script>
+                      document.addEventListener("DOMContentLoaded", () => {
+                        new ApexCharts(
+                          document.querySelector("#reportsChart"),
+                          {
+                            series: [
+                              {
+                                name: "Consultas",
+                                data: [31, 40, 28, 51, 42, 82, 56],
+                              },
+                              {
+                                name: "Receita",
+                                data: [11, 32, 45, 32, 34, 52, 41],
+                              },
+                              {
+                                name: "Pacientes",
+                                data: [15, 11, 32, 18, 9, 24, 11],
+                              },
+                            ],
+                            chart: {
+                              height: 350,
+                              type: "area",
+                              toolbar: {
+                                show: false,
+                              },
+                            },
+                            markers: {
+                              size: 4,
+                            },
+                            colors: ["#4154f1", "#2eca6a", "#ff771d"],
+                            fill: {
+                              type: "gradient",
+                              gradient: {
+                                shadeIntensity: 1,
+                                opacityFrom: 0.3,
+                                opacityTo: 0.4,
+                                stops: [0, 90, 100],
+                              },
+                            },
+                            dataLabels: {
+                              enabled: false,
+                            },
+                            stroke: {
+                              curve: "smooth",
+                              width: 2,
+                            },
+                            xaxis: {
+                              type: "datetime",
+                              categories: [
+                                "2024-09-19T00:00:00.000Z",
+                                "2024-09-20T00:00:00.000Z",
+                                "2024-09-21T00:00:00.000Z",
+                                "2024-09-22T00:00:00.000Z",
+                                "2024-09-23T00:00:00.000Z",
+                                "2024-09-24T00:00:00.000Z",
+                                "2024-09-25T00:00:00.000Z",
+                              ],
+                            },
+                            tooltip: {
+                              x: {
+                                format: "dd/MM/yy",
+                              },
+                            },
+                          }
+                        ).render();
+                      });
+                    </script>
+                    <!-- Fim do Gráfico de Linha -->
+                  </div>
+                </div>
+              </div>
+              <!-- Fim dos Relatórios -->
+
+              <!-- Últimos Atendimentos -->
+              <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                  <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"
+                      ><i class="bi bi-three-dots"></i
+                    ></a>
+                    <ul
+                      class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
+                    >
+                      <li class="dropdown-header text-start">
+                        <h6>Filtro</h6>
+                      </li>
+
+                      <li><a class="dropdown-item" href="#">Hoje</a></li>
+                      <li><a class="dropdown-item" href="#">Este Mês</a></li>
+                      <li><a class="dropdown-item" href="#">Este Ano</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      Últimos Atendimentos <span>| Hoje</span>
+                    </h5>
+
+                    <table class="table table-borderless datatable">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Paciente</th>
+                          <th scope="col">Serviço</th>
+                          <th scope="col">Preço</th>
+                          <th scope="col">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row"><a href="#">#2457</a></th>
+                          <td>João Silva</td>
+                          <td>
+                            <a href="#" class="text-primary">Limpeza Dental</a>
+                          </td>
+                          <td>R$150</td>
+                          <td>
+                            <span class="badge bg-success">Concluído</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="#">#2147</a></th>
+                          <td>Maria Oliveira</td>
+                          <td>
+                            <a href="#" class="text-primary">Obturações</a>
+                          </td>
+                          <td>R$80</td>
+                          <td>
+                            <span class="badge bg-warning">Pendente</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="#">#2049</a></th>
+                          <td>Carlos Santos</td>
+                          <td>
+                            <a href="#" class="text-primary"
+                              >Tratamento de Canal</a
+                            >
+                          </td>
+                          <td>R$200</td>
+                          <td>
+                            <span class="badge bg-success">Concluído</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="#">#2644</a></th>
+                          <td>Ana Souza</td>
+                          <td>
+                            <a href="#" class="text-primary">Limpeza Dental</a>
+                          </td>
+                          <td>R$250</td>
+                          <td>
+                            <span class="badge bg-danger">Cancelado</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="#">#2645</a></th>
+                          <td>Pedro Ferreira</td>
+                          <td>
+                            <a href="#" class="text-primary"
+                              >Extração Dentária</a
+                            >
+                          </td>
+                          <td>R$60</td>
+                          <td>
+                            <span class="badge bg-success">Concluído</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!-- Fim dos Últimos Atendimentos -->
+
+              <!-- Serviços Mais Solicitados -->
+              <div class="col-12">
+                <div class="card top-selling overflow-auto">
+                  <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"
+                      ><i class="bi bi-three-dots"></i
+                    ></a>
+                    <ul
+                      class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
+                    >
+                      <li class="dropdown-header text-start">
+                        <h6>Filtro</h6>
+                      </li>
+
+                      <li><a class="dropdown-item" href="#">Hoje</a></li>
+                      <li><a class="dropdown-item" href="#">Este Mês</a></li>
+                      <li><a class="dropdown-item" href="#">Este Ano</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="card-body pb-0">
+                    <h5 class="card-title">
+                      Serviços Mais Solicitados <span>| Hoje</span>
+                    </h5>
+
+                    <table class="table table-borderless">
+                      <thead>
+                        <tr>
+                          <th scope="col">Serviço</th>
+                          <th scope="col">Preço</th>
+                          <th scope="col">Realizados</th>
+                          <th scope="col">Receita</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <a href="#" class="text-primary fw-bold"
+                              >Limpeza Dental</a
+                            >
+                          </td>
+                          <td>R$150</td>
+                          <td class="fw-bold">124</td>
+                          <td>R$18.600</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <a href="#" class="text-primary fw-bold"
+                              >Obturações</a
+                            >
+                          </td>
+                          <td>R$80</td>
+                          <td class="fw-bold">98</td>
+                          <td>R$7.840</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <a href="#" class="text-primary fw-bold"
+                              >Tratamento de Canal</a
+                            >
+                          </td>
+                          <td>R$200</td>
+                          <td class="fw-bold">74</td>
+                          <td>R$14.800</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <a href="#" class="text-primary fw-bold"
+                              >Implante</a
+                            >
+                          </td>
+                          <td>R$120</td>
+                          <td class="fw-bold">63</td>
+                          <td>R$7.560</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <a href="#" class="text-primary fw-bold"
+                              >Extração Dentária</a
+                            >
+                          </td>
+                          <td>R$250</td>
+                          <td class="fw-bold">41</td>
+                          <td>R$10.250</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!-- Fim dos Serviços Mais Solicitados -->
+            </div>
+          </div>
+          <!-- Fim das colunas do lado esquerdo -->
+
+          <!-- Colunas do lado direito -->
+          <div class="col-lg-4">
+            <!-- Atividade Recente -->
+            <div class="card">
+              <div class="filter">
+                <a class="icon" href="#" data-bs-toggle="dropdown"
+                  ><i class="bi bi-three-dots"></i
+                ></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <li class="dropdown-header text-start">
+                    <h6>Filtro</h6>
+                  </li>
+
+                  <li><a class="dropdown-item" href="#">Hoje</a></li>
+                  <li><a class="dropdown-item" href="#">Este Mês</a></li>
+                  <li><a class="dropdown-item" href="#">Este Ano</a></li>
+                </ul>
+              </div>
+
+              <div class="card-body">
+                <h5 class="card-title">
+                  Atividade Recente <span>| Hoje</span>
+                </h5>
+
+                <div class="activity">
+                  <div class="activity-item d-flex">
+                    <div class="activite-label">32 min</div>
+                    <i
+                      class="bi bi-circle-fill activity-badge text-success align-self-start"
+                    ></i>
+                    <div class="activity-content">
+                      Novo paciente
+                      <a href="#" class="fw-bold text-dark">João Silva</a>
+                      cadastrado
+                    </div>
+                  </div>
+                  <!-- Fim do item de atividade-->
+
+                  <div class="activity-item d-flex">
+                    <div class="activite-label">56 min</div>
+                    <i
+                      class="bi bi-circle-fill activity-badge text-danger align-self-start"
+                    ></i>
+                    <div class="activity-content">
+                      Consulta de
+                      <a href="#" class="fw-bold text-dark">Maria Oliveira</a>
+                      cancelada
+                    </div>
+                  </div>
+                  <!-- Fim do item de atividade-->
+
+                  <div class="activity-item d-flex">
+                    <div class="activite-label">2 hrs</div>
+                    <i
+                      class="bi bi-circle-fill activity-badge text-primary align-self-start"
+                    ></i>
+                    <div class="activity-content">
+                      Resultado de exame de
+                      <a href="#" class="fw-bold text-dark">Carlos Santos</a>
+                      disponível
+                    </div>
+                  </div>
+                  <!-- Fim do item de atividade-->
+
+                  <div class="activity-item d-flex">
+                    <div class="activite-label">1 dia</div>
+                    <i
+                      class="bi bi-circle-fill activity-badge text-info align-self-start"
+                    ></i>
+                    <div class="activity-content">
+                      Agendamento de consulta com
+                      <a href="#" class="fw-bold text-dark">Dra. Ana Souza</a>
+                      confirmado
+                    </div>
+                  </div>
+                  <!-- Fim do item de atividade-->
+
+                  <div class="activity-item d-flex">
+                    <div class="activite-label">2 dias</div>
+                    <i
+                      class="bi bi-circle-fill activity-badge text-warning align-self-start"
+                    ></i>
+                    <div class="activity-content">
+                      Estoque de medicamentos atualizado
+                    </div>
+                  </div>
+                  <!-- Fim do item de atividade-->
+
+                  <div class="activity-item d-flex">
+                    <div class="activite-label">4 semanas</div>
+                    <i
+                      class="bi bi-circle-fill activity-badge text-muted align-self-start"
+                    ></i>
+                    <div class="activity-content">
+                      Relatório mensal disponível para download
+                    </div>
+                  </div>
+                  <!-- Fim do item de atividade-->
+                </div>
+              </div>
+            </div>
+            <!-- Fim da Atividade Recente -->
+
+            <!-- Relatório Financeiro -->
+            <div class="card">
+              <div class="filter">
+                <a class="icon" href="#" data-bs-toggle="dropdown"
+                  ><i class="bi bi-three-dots"></i
+                ></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <li class="dropdown-header text-start">
+                    <h6>Filtro</h6>
+                  </li>
+
+                  <li><a class="dropdown-item" href="#">Hoje</a></li>
+                  <li><a class="dropdown-item" href="#">Este Mês</a></li>
+                  <li><a class="dropdown-item" href="#">Este Ano</a></li>
+                </ul>
+              </div>
+
+              <div class="card-body pb-0">
+                <h5 class="card-title">
+                  Relatório Financeiro <span>| Este Mês</span>
+                </h5>
+
+                <div
+                  id="budgetChart"
+                  style="min-height: 400px"
+                  class="echart"
+                ></div>
+
+                <script>
+                  document.addEventListener("DOMContentLoaded", () => {
+                    var budgetChart = echarts
+                      .init(document.querySelector("#budgetChart"))
+                      .setOption({
+                        legend: {
+                          data: ["Orçamento Alocado", "Gastos Reais"],
+                        },
+                        radar: {
+                          // shape: 'circle',
+                          indicator: [
+                            { name: "Consultas", max: 6500 },
+                            { name: "Administração", max: 16000 },
+                            { name: "Tecnologia da Informação", max: 30000 },
+                            { name: "Atendimento ao Paciente", max: 38000 },
+                            { name: "Desenvolvimento", max: 52000 },
+                            { name: "Marketing", max: 25000 },
+                          ],
+                        },
+                        series: [
+                          {
+                            name: "Orçamento vs Gastos",
+                            type: "radar",
+                            data: [
+                              {
+                                value: [4200, 3000, 20000, 35000, 50000, 18000],
+                                name: "Orçamento Alocado",
+                              },
+                              {
+                                value: [
+                                  5000, 14000, 28000, 26000, 42000, 21000,
+                                ],
+                                name: "Gastos Reais",
+                              },
+                            ],
+                          },
+                        ],
+                      });
+                  });
+                </script>
+              </div>
+            </div>
+            <!-- Fim do Relatório Financeiro -->
+
+            <!-- Notícias e Atualizações -->
+            <div class="card">
+              <div class="filter">
+                <a class="icon" href="#" data-bs-toggle="dropdown"
+                  ><i class="bi bi-three-dots"></i
+                ></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <li class="dropdown-header text-start">
+                    <h6>Filtro</h6>
+                  </li>
+
+                  <li><a class="dropdown-item" href="#">Hoje</a></li>
+                  <li><a class="dropdown-item" href="#">Este Mês</a></li>
+                  <li><a class="dropdown-item" href="#">Este Ano</a></li>
+                </ul>
+              </div>
+
+              <div class="card-body pb-0">
+                <h5 class="card-title">
+                  Notícias &amp; Atualizações <span>| Hoje</span>
+                </h5>
+
+                <div class="news">
+                  <div class="post-item clearfix">
+                    <img src="assets/img/news-1.jpg" alt="" />
+                    <h4>
+                      <a href="#">Novos horários de atendimento disponíveis</a>
+                    </h4>
+                    <p>
+                      A partir da próxima semana, atenderemos também aos sábados
+                      das 8h às 12h.
+                    </p>
+                  </div>
+
+                  <div class="post-item clearfix">
+                    <img src="assets/img/news-2.jpg" alt="" />
+                    <h4>
+                      <a href="#">Clínica oferece novos exames de imagem</a>
+                    </h4>
+                    <p>
+                      Agora contamos com equipamentos modernos para ressonância
+                      magnética e tomografia.
+                    </p>
+                  </div>
+
+                  <div class="post-item clearfix">
+                    <img src="assets/img/news-3.jpg" alt="" />
+                    <h4>
+                      <a href="#">Campanha de vacinação contra a gripe</a>
+                    </h4>
+                    <p>
+                      A vacinação começa este mês. Agende seu horário e
+                      proteja-se contra a gripe.
+                    </p>
+                  </div>
+
+                  <div class="post-item clearfix">
+                    <img src="assets/img/news-4.jpg" alt="" />
+                    <h4>
+                      <a href="#">Equipe médica participa de treinamento</a>
+                    </h4>
+                    <p>
+                      Nossos profissionais estão atualizados com as mais
+                      recentes técnicas médicas.
+                    </p>
+                  </div>
+
+                  <div class="post-item clearfix">
+                    <img src="assets/img/news-5.jpg" alt="" />
+                    <h4><a href="#">Lançamento do aplicativo da clínica</a></h4>
+                    <p>
+                      Agora você pode agendar consultas e exames pelo nosso
+                      aplicativo móvel.
+                    </p>
+                  </div>
+                </div>
+                <!-- Fim das notícias recentes -->
+              </div>
+            </div>
+            <!-- Fim das Notícias e Atualizações -->
+          </div>
+          <!-- Fim das colunas do lado direito -->
+        </div>
+      </section>
+    </main>
+    <!-- Fim do #main -->
+
+    <!-- ======= Rodapé ======= -->
+    <footer id="footer" class="footer">
+      <div class="copyright">
+        &copy; 2024 <strong><span>OdontoSmart</span></strong
+        >. Todos os direitos reservados.
+      </div>
+      <div class="credits">
+        <!-- Todos os links no rodapé devem permanecer intactos. -->
+        <!-- Você pode excluir os links somente se adquiriu a versão pro. -->
+        <!-- Informações de licenciamento: https://bootstrapmade.com/license/ -->
+        <!-- Adquira a versão pro com formulário de contato em PHP/AJAX: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+        Desenvolvido por <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </footer>
+    <!-- Fim do Rodapé -->
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Arquivos JS dos Vendors -->
+    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="assets/vendor/echarts/echarts.min.js"></script>
+    <script src="assets/vendor/quill/quill.js"></script>
+    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Arquivo JS Principal do Template -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
