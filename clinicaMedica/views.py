@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import MedicoDentista, Recepcionista, Gestor
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -12,7 +13,7 @@ def index(request):
         funcionario = authenticate(request, email=email, password=senha)
         if funcionario is not None:
             login(request, funcionario)
-            return redirect('login')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Email ou senha incorretos')
     return render(request, 'pages-login.html')
@@ -47,3 +48,31 @@ def primeiro_acesso(request):
             messages.error(request, 'Funcionário não encontrado', 'danger')
 
     return render(request, 'primeiro-acesso.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+@login_required
+def dashboard(request):
+    return render(request, 'index.html')
+
+@login_required
+def perfil(request):
+    return render(request, 'users-profile.html')
+
+@login_required
+def procurar_paciente(request):
+    return render(request, 'procurar-paciente.html')
+
+@login_required
+def cadastrar_paciente(request):
+    return render(request, 'cadastrar-paciente.html')
+
+@login_required
+def funcionario(request):
+    return render(request, 'pages.funcionario.html')
+
+@login_required
+def faq(request):
+    return render(request, 'pages-faq.html')

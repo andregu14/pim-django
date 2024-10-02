@@ -23,4 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("login/", views.index, name='login'),
     path('primeiro-acesso/', views.primeiro_acesso, name='primeiro_acesso'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('logout/', views.logout_view, name='logout'),
+    path('perfil/', views.perfil, name='perfil'),
+    path('procurar-paciente/', views.procurar_paciente, name='procurar-paciente'),
+    path('cadastrar-paciente/', views.cadastrar_paciente, name='cadastrar-paciente'),
+    path('funcionario/', views.funcionario, name='funcionario'),
+    path('faq/', views.faq, name='faq'),
 ]

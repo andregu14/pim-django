@@ -40,6 +40,18 @@ class Funcionario(AbstractBaseUser, PermissionsMixin):
         if self.is_first_login and not self.password:
             self.set_password(None)
         super().save(*args, **kwargs)
+    
+    def first_name(self):
+        return self.nome.split()[0]
+    
+    def first_two_names(self):
+        parts = self.nome.split()
+        if len(parts) == 1:
+            return self.nome
+        elif len(parts) == 2:
+            return f"{parts[0]} {parts[1]}"
+        else:
+            return f"{parts[0]} {parts[-1]}"
 
     def __str__(self):
         return self.nome

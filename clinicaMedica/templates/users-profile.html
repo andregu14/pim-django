@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -9,33 +10,48 @@
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon" />
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+    <link href="{% static 'img/favicon.png' %}" rel="icon" />
+    <link
+      href="{% static 'img/apple-touch-icon.png' %}"
+      rel="apple-touch-icon"
+    />
 
-    <!-- Fontes do Google -->
+    <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
       rel="stylesheet"
     />
 
-    <!-- Arquivos CSS do Vendor -->
+    <!-- Vendor CSS Files -->
     <link
-      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
       rel="stylesheet"
     />
     <link
-      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}"
       rel="stylesheet"
     />
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" />
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+    <link
+      href="{% static 'vendor/boxicons/css/boxicons.min.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'vendor/quill/quill.snow.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'vendor/quill/quill.bubble.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/remixicon/remixicon.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/simple-datatables/style.css' %}"
+      rel="stylesheet"
+    />
 
-    <!-- Arquivo CSS Principal do Template -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- Template Main CSS File -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
 
     <!-- =======================================================
     * Nome do Template: Dashboard Clínica Médica
@@ -47,8 +63,8 @@
     <!-- ======= Cabeçalho ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-          <img src="assets/img/logo.png" alt="" />
+        <a href="{% url 'dashboard' %}" class="logo d-flex align-items-center">
+          <img src="{% static 'img/logo.png' %}" alt="" />
           <span class="d-none d-lg-block">OdontoSmart</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -186,7 +202,7 @@
               <li class="message-item">
                 <a href="#">
                   <img
-                    src="assets/img/messages-1.jpg"
+                    src="{% static 'img/messages-1.jpg' %}"
                     alt=""
                     class="rounded-circle"
                   />
@@ -204,7 +220,7 @@
               <li class="message-item">
                 <a href="#">
                   <img
-                    src="assets/img/messages-2.jpg"
+                    src="{% static 'img/messages-2.jpg' %}"
                     alt=""
                     class="rounded-circle"
                   />
@@ -222,7 +238,7 @@
               <li class="message-item">
                 <a href="#">
                   <img
-                    src="assets/img/messages-3.jpg"
+                    src="{% static 'img/messages-3.jpg' %}"
                     alt=""
                     class="rounded-circle"
                   />
@@ -252,12 +268,12 @@
               data-bs-toggle="dropdown"
             >
               <img
-                src="assets/img/profile-img.jpg"
+                src="{% static 'img/profile-img.png' %}"
                 alt="Perfil"
                 class="rounded-circle"
               />
               <span class="d-none d-md-block dropdown-toggle ps-2"
-                >Grupo 3</span
+                >{{ user.first_name }}</span
               > </a
             ><!-- Fim do Ícone de Imagem de Perfil -->
 
@@ -265,8 +281,8 @@
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
             >
               <li class="dropdown-header">
-                <h6>Grupo 3</h6>
-                <span>PIM</span>
+                <h6>{{ user.first_name }}</h6>
+                <span>{{ user.cargo }}</span>
               </li>
               <li>
                 <hr class="dropdown-divider" />
@@ -275,7 +291,7 @@
               <li>
                 <a
                   class="dropdown-item d-flex align-items-center"
-                  href="users-profile.html"
+                  href="{% url 'perfil' %}"
                 >
                   <i class="bi bi-person"></i>
                   <span>Meu Perfil</span>
@@ -288,7 +304,7 @@
               <li>
                 <a
                   class="dropdown-item d-flex align-items-center"
-                  href="users-profile.html"
+                  href="{% url 'perfil' %}"
                 >
                   <i class="bi bi-gear"></i>
                   <span>Configurações</span>
@@ -301,7 +317,7 @@
               <li>
                 <a
                   class="dropdown-item d-flex align-items-center"
-                  href="pages-faq.html"
+                  href="{% url 'faq' %}"
                 >
                   <i class="bi bi-question-circle"></i>
                   <span>Precisa de ajuda?</span>
@@ -312,7 +328,7 @@
               </li>
 
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sair</span>
                 </a>
@@ -331,7 +347,7 @@
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-          <a class="nav-link collapsed" href="index.html">
+          <a class="nav-link collapsed" href="{% url 'dashboard' %}">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
@@ -339,7 +355,7 @@
         <!-- Fim da Navegação do Dashboard -->
 
         <li class="nav-item">
-          <a class="nav-link" href="users-profile.html">
+          <a class="nav-link" href="{% url 'perfil' %}">
             <i class="bi bi-person"></i>
             <span>Perfil</span>
           </a>
@@ -393,14 +409,14 @@
             data-bs-parent="#sidebar-nav"
           >
             <li>
-              <a href="procurar-paciente.html">
-                <i class="bi bi-circle-fill"></i>
+              <a href="{% url 'procurar-paciente' %}">
+                <i class="bi bi-search" style="font-size: 15px"></i>
                 <span>Procurar Paciente</span>
               </a>
             </li>
             <li>
-              <a href="cadastrar-paciente.html">
-                <i class="bi bi-circle-fill"></i>
+              <a href="{% url 'cadastrar-paciente' %}">
+                <i class="bi bi-card-list" style="font-size: 15px"></i>
                 <span>Cadastrar Paciente</span>
               </a>
             </li>
@@ -408,7 +424,7 @@
         </li>
         <!-- Fim da Navegação do menu de paciente-->
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages.funcionario.html">
+          <a class="nav-link collapsed" href="{% url 'funcionario' %}">
             <i class="bi bi-briefcase"></i>
             <span>Funcionários</span>
           </a>
@@ -416,7 +432,7 @@
         <!-- Fim da Navegação da Página de Perfil -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-faq.html">
+          <a class="nav-link collapsed" href="{% url 'faq' %}">
             <i class="bi bi-question-circle"></i>
             <span>Perguntas Frequentes</span>
           </a>
@@ -456,7 +472,7 @@
         <!-- Fim da Navegação da Página de Erro 404 -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-login.html">
+          <a class="nav-link collapsed" href="{% url 'logout' %}">
             <i class="bi bi-box-arrow-right"></i>
             <span>Sair</span>
           </a>
@@ -471,9 +487,9 @@
         <h1>Perfil</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Início</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Início</a></li>
             <li class="breadcrumb-item">
-              <a href="pages.funcionario.html">Funcionários</a>
+              <a href="{% url 'funcionario' %}">Funcionários</a>
             </li>
             <li class="breadcrumb-item active">Perfil</li>
           </ol>
@@ -489,12 +505,12 @@
                 class="card-body profile-card pt-4 d-flex flex-column align-items-center"
               >
                 <img
-                  src="assets/img/profile-img.jpg"
+                  src="{% static 'img/profile-img.png' %}"
                   alt="Perfil"
                   class="rounded-circle"
                 />
-                <h2>Dr. João Almeida</h2>
-                <h3>Médico Odontólogo</h3>
+                <h2>{{ user.first_two_names }}</h2>
+                <h3>{{ user.cargo }}</h3>
                 <div class="social-links mt-2">
                   <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                   <a href="#" class="facebook"
@@ -572,12 +588,12 @@
 
                     <div class="row">
                       <div class="col-lg-3 col-md-4 label">Nome Completo</div>
-                      <div class="col-lg-9 col-md-8">Dr. João Almeida</div>
+                      <div class="col-lg-9 col-md-8">{{ user.nome }}</div>
                     </div>
 
                     <div class="row">
                       <div class="col-lg-3 col-md-4 label">CPF</div>
-                      <div class="col-lg-9 col-md-8">161.252.383-45</div>
+                      <div class="col-lg-9 col-md-8">{{ user.cpf }}</div>
                     </div>
 
                     <div class="row">
@@ -610,7 +626,7 @@
                     <div class="row">
                       <div class="col-lg-3 col-md-4 label">E-mail</div>
                       <div class="col-lg-9 col-md-8">
-                        dr.vinicius@odontosmart.com.br
+                        {{ user.email }}
                       </div>
                     </div>
                   </div>
@@ -628,7 +644,10 @@
                           >Imagem de Perfil</label
                         >
                         <div class="col-md-8 col-lg-9">
-                          <img src="assets/img/profile-img.jpg" alt="Perfil" />
+                          <img
+                            src="{% static 'img/profile-img.png' %}"
+                            alt="Perfil"
+                          />
                           <div class="pt-2">
                             <a
                               href="#"
@@ -658,7 +677,7 @@
                             type="text"
                             class="form-control"
                             id="fullName"
-                            value="Dr. João Almeida"
+                            value="{{ user.nome }}"
                           />
                         </div>
                       </div>
@@ -778,7 +797,7 @@ Médico dedicado com mais de 15 anos de experiência em odontologia. Comprometid
                             type="email"
                             class="form-control"
                             id="email"
-                            value="dr.joao@odontosmart.com.br"
+                            value="{{ user.email }}"
                           />
                         </div>
                       </div>
@@ -1020,17 +1039,16 @@ Médico dedicado com mais de 15 anos de experiência em odontologia. Comprometid
       ><i class="bi bi-arrow-up-short"></i
     ></a>
 
-    <!-- Arquivos JS dos Vendors -->
-    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="assets/vendor/echarts/echarts.min.js"></script>
-    <script src="assets/vendor/quill/quill.js"></script>
-    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="{% static 'vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/chart.js/chart.umd.js' %}"></script>
+    <script src="{% static 'vendor/echarts/echarts.min.js' %}"></script>
+    <script src="{% static 'vendor/quill/quill.js' %}"></script>
+    <script src="{% static 'vendor/simple-datatables/simple-datatables.js' %}"></script>
+    <script src="{% static 'vendor/tinymce/tinymce.min.js' %}"></script>
 
-    <!-- Arquivo JS Principal do Template -->
-    <script src="assets/js/main.js"></script>
+    <!-- Template Main JS File -->
+    <script src="{% static 'js/main.js' %}"></script>
   </body>
 </html>
