@@ -9,13 +9,11 @@ def index(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         senha = request.POST.get('senha')
-        funcionario = authenticate(request, username=email, password=senha)
+        funcionario = authenticate(request, email=email, password=senha)
         if funcionario is not None:
             login(request, funcionario)
-            print("Usuario autenticado")
-            return redirect('home')
+            return redirect('login')
         else:
-            print("Email ou senha incorretos")
             messages.error(request, 'Email ou senha incorretos')
     return render(request, 'pages-login.html')
 
@@ -38,7 +36,7 @@ def primeiro_acesso(request):
 
         if funcionario:
             if funcionario.is_first_login:
-                funcionario.senha = make_password(senha)
+                funcionario.password = make_password(senha)
                 funcionario.is_first_login = False
                 funcionario.save()
                 messages.success(request, 'Senha salva com sucesso')
@@ -49,5 +47,3 @@ def primeiro_acesso(request):
             messages.error(request, 'Funcionário não encontrado', 'danger')
 
     return render(request, 'primeiro-acesso.html')
-
-

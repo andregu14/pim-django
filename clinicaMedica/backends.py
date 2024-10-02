@@ -1,32 +1,28 @@
 from django.contrib.auth.backends import BaseBackend
 from django.contrib.auth.hashers import check_password
+from django.utils import timezone
 from .models import MedicoDentista, Recepcionista, Gestor
 
 class EmailBackend(BaseBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
-        try:
-            user = MedicoDentista.objects.get(email=username)
-        except MedicoDentista.DoesNotExist:
+        for model in [MedicoDentista, Recepcionista, Gestor]:
             try:
-                user = Recepcionista.objects.get(email=username)
-            except Recepcionista.DoesNotExist:
-                try:
-                    user = Gestor.objects.get(email=username)
-                except Gestor.DoesNotExist:
-                    return None
-
-        if user and check_password(password, user.senha):
-            return user
+                user = model.objects.get(email=username)
+                if user and check_password(password, user.password):
+                    self._update_last_login(user)
+                    return user
+            except model.DoesNotExist:
+                continue
         return None
 
     def get_user(self, user_id):
-        try:
-            return MedicoDentista.objects.get(pk=user_id)
-        except MedicoDentista.DoesNotExist:
+        for model in [MedicoDentista, Recepcionista, Gestor]:
             try:
-                return Recepcionista.objects.get(pk=user_id)
-            except Recepcionista.DoesNotExist:
-                try:
-                    return Gestor.objects.get(pk=user_id)
-                except Gestor.DoesNotExist:
-                    return None
+                return model.objects.get(pk=user_id)
+            except model.DoesNotExist:
+                continue
+        return None
+
+    def _update_last_login(self, user):
+        user.last_login = timezone.now()
+        user.save(update_fields=['last_login'])

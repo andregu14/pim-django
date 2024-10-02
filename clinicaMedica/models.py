@@ -1,25 +1,48 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.contrib.auth.hashers import make_password
 
-# Create your models here.
-class Funcionario(models.Model):
+class FuncionarioManager(BaseUserManager):
+    def create_user(self, email, cpf, nome, cargo, salario, password=None, **extra_fields):
+        if not email:
+            raise ValueError('O email deve ser fornecido')
+        email = self.normalize_email(email)
+        user = self.model(email=email, cpf=cpf, nome=nome, cargo=cargo, salario=salario, **extra_fields)
+        if password:
+            user.set_password(password)
+        else:
+            user.set_password(self.make_random_password())
+        
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, cpf, nome, cargo, salario, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self.create_user(email, cpf, nome, cargo, salario, password, **extra_fields)
+
+class Funcionario(AbstractBaseUser, PermissionsMixin):
     id_funcionario = models.AutoField(primary_key=True)
     cpf = models.CharField(max_length=11, unique=True)
     email = models.EmailField(unique=True, blank=False)
     salario = models.DecimalField(max_digits=10, decimal_places=2)
     cargo = models.CharField(max_length=50)
     nome = models.CharField(max_length=50)
-    senha = models.CharField(max_length=128, null=True, blank=True)
     is_first_login = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+
+    objects = FuncionarioManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['cpf', 'nome', 'cargo', 'salario']
 
     def save(self, *args, **kwargs):
-        if self.senha and not self.senha.startswith('pbkdf2_sha256$'):
-            self.senha = make_password(self.senha)
+        if self.is_first_login and not self.password:
+            self.set_password(None)
         super().save(*args, **kwargs)
 
-    
-    class Meta:
-        abstract = True
+    def __str__(self):
+        return self.nome
 
 class MedicoDentista(Funcionario):
     especializacao = models.CharField(max_length=60)
@@ -49,7 +72,7 @@ class Paciente(models.Model):
 
     def __str__(self):
         return self.nome
-    
+
 class Consulta(models.Model):
     id_consulta = models.AutoField(primary_key=True)
     data_hora = models.DateTimeField(verbose_name="Data e Hora", blank=False)
@@ -59,4 +82,3 @@ class Consulta(models.Model):
 
     def __str__(self):
         return f"Consulta {self.id_consulta} - {self.paciente.nome} com {self.medico_dentista.nome} em {self.data_hora}"
-

@@ -107,6 +107,9 @@ AUTHENTICATION_BACKENDS = [
     'clinicaMedica.backends.EmailBackend',
 ]
 
+AUTH_USER_MODEL = 'clinicaMedica.Funcionario'
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
