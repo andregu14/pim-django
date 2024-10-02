@@ -15,7 +15,7 @@ def index(request):
             login(request, funcionario)
             return redirect('dashboard')
         else:
-            messages.error(request, 'Email ou senha incorretos')
+            messages.error(request, 'Email ou senha incorretos', 'danger')
     return render(request, 'pages-login.html')
 
 def primeiro_acesso(request):
