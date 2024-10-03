@@ -8,10 +8,6 @@ class FuncionarioManager(BaseUserManager):
             raise ValueError('O email deve ser fornecido')
         email = self.normalize_email(email)
         user = self.model(email=email, cpf=cpf, nome=nome, cargo=cargo, salario=salario, **extra_fields)
-        if password:
-            user.set_password(password)
-        else:
-            user.set_password(self.make_random_password())
         
         user.save(using=self._db)
         return user
