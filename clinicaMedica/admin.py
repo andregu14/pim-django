@@ -70,3 +70,10 @@ class RecepcionistaAdmin(UserAdmin):
     )
     
     list_filter = ('nome', 'cargo', 'date_joined')
+
+admin.site.register(Funcionario, FuncionarioAdmin)
+admin.site.register(Dentista, DentistaAdmin)
+admin.site.register(Recepcionista, RecepcionistaAdmin)
+admin.site.register(Gestor, GestorAdmin)
+admin.site.register(Paciente)
+admin.site.register(Consulta)
