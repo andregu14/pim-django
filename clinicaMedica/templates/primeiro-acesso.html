@@ -147,7 +147,7 @@
                       </div>
 
                       <div class="col-12">
-                        <button class="btn btn-primary w-100" type="submit">
+                        <button class="btn btn-primary w-100" id="botaoSubmit" disabled type="submit">
                           Cadastrar Senha
                         </button>
                       </div>
@@ -205,6 +205,21 @@
             }, 3000);
         });
     </script>
+    <script>
+      document.getElementById('confirmar_senha').addEventListener('input', function(event) {
+          let senha = document.getElementById('senha').value
+          let confirmarSenha = document.getElementById('confirmar_senha').value
+          let botaoSubmit = document.getElementById('botaoSubmit')
+
+          if (senha === confirmarSenha && senha !== '') {
+              document.getElementById('confirmar_senha').classList.remove('is-invalid')
+              botaoSubmit.disabled = false
+          } else {
+              document.getElementById('confirmar_senha').classList.add('is-invalid')
+              botaoSubmit.disabled = true
+          }
+      })
+  </script>
 
 
 

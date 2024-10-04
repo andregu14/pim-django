@@ -73,12 +73,14 @@ class Gestor(Funcionario):
         return self.nome
 
 class Paciente(models.Model):
-    id_paciente = models.AutoField(primary_key=True)
     cpf = models.CharField(max_length=11, unique=True)
     nome = models.CharField(max_length=50, blank=False)
     email = models.EmailField(unique=True, blank=False)
     telefone = models.CharField(max_length=50, blank=False)
+    endereco = models.CharField(max_length=50, blank=False)
     data_de_nascimento = models.DateField(verbose_name="Data de Nascimento", blank=False)
+    estado = models.CharField(max_length=50, blank=False)
+    cep = models.CharField(max_length=9, blank=False)
 
     def __str__(self):
         return self.nome
