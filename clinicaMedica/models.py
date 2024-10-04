@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.contrib.auth.hashers import make_password
+from django.utils import timezone
 
 class FuncionarioManager(BaseUserManager):
     def create_user(self, email, cpf, nome, cargo, salario, password=None, **extra_fields):
@@ -26,6 +27,7 @@ class Funcionario(AbstractBaseUser, PermissionsMixin):
     nome = models.CharField(max_length=50)
     is_first_login = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(verbose_name="Data de Ingresso", default=timezone.now)
 
     objects = FuncionarioManager()
 
@@ -52,7 +54,7 @@ class Funcionario(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.nome
 
-class MedicoDentista(Funcionario):
+class Dentista(Funcionario):
     especializacao = models.CharField(max_length=60)
 
     def __str__(self):
@@ -86,7 +88,7 @@ class Consulta(models.Model):
     data_hora = models.DateTimeField(verbose_name="Data e Hora", blank=False)
     status = models.CharField(max_length=20)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-    medico_dentista = models.ForeignKey(MedicoDentista, on_delete=models.CASCADE)
+    medico_dentista = models.ForeignKey(Dentista, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Consulta {self.id_consulta} - {self.paciente.nome} com {self.medico_dentista.nome} em {self.data_hora}"

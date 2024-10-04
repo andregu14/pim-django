@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import MedicoDentista, Recepcionista, Gestor
+from .models import Dentista, Recepcionista, Gestor, Funcionario
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -23,17 +23,12 @@ def primeiro_acesso(request):
         email = request.POST.get('email')
         senha = request.POST.get('senha')
         funcionario = None
-        try:
-            funcionario = MedicoDentista.objects.get(email=email)
-        except MedicoDentista.DoesNotExist:
+        for model in [Funcionario]:
             try:
-                funcionario = Recepcionista.objects.get(email=email)
-            except Recepcionista.DoesNotExist:
-                try:
-                    funcionario = Gestor.objects.get(email=email)
-                except Gestor.DoesNotExist:
-                    messages.error(request, 'Funcionário não encontrado', 'danger')
-                    return render(request, 'primeiro-acesso.html')
+                funcionario = model.objects.get(email=email)
+            except funcionario.DoesNotExist:
+                messages.error(request, 'Funcionário não encontrado', 'danger')
+                return render(request, 'primeiro-acesso.html')
 
         if funcionario:
             if funcionario.is_first_login:

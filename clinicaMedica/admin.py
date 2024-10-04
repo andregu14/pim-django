@@ -1,70 +1,72 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .forms import FuncionarioCreationForm, GestorCreationForm, DentistaCreationForm
+from .forms import RecepcionistaCreationForm, GestorCreationForm, DentistaCreationForm
 
-from .models import Funcionario, MedicoDentista, Recepcionista, Gestor, Paciente, Consulta
+from .models import Funcionario, Dentista, Recepcionista, Gestor, Paciente, Consulta
 
 
 class FuncionarioAdmin(UserAdmin):
-    add_form = FuncionarioCreationForm
     model = Funcionario
-    list_display = ('email', 'nome', 'cpf', 'cargo', 'is_staff', 'is_superuser')
+    list_display = ('email', 'nome', 'cpf', 'cargo', 'date_joined')
     search_fields = ('email', 'nome', 'cpf')
     ordering = ('email',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        ('Autenticação', {'fields': ('email', 'password')}),
         ('Informações Pessoais', {'fields': ('nome', 'cpf', 'cargo', 'salario')}),
-        ('Permissões', {'fields': ('is_staff', 'is_superuser')}),
     )
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'nome', 'cpf', 'cargo', 'salario', 'is_staff', 'is_superuser')}
-        ),
-    )
-    list_filter = ('is_staff', 'is_superuser')
+
+    list_filter = ('nome', 'cargo', 'date_joined')
+
+    def has_add_permission(self, request):
+        return False
 
 class GestorAdmin(UserAdmin):
     add_form = GestorCreationForm
     model = Gestor
-    list_display = ('email', 'nome', 'cpf', 'cargo', 'is_staff', 'is_superuser')
+    list_display = ('email', 'nome', 'cpf', 'cargo', 'date_joined')
     search_fields = ('email', 'nome', 'cpf')
     ordering = ('email',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        ('Autenticação', {'fields': ('email', 'password')}),
         ('Informações Pessoais', {'fields': ('nome', 'cpf', 'cargo', 'salario')}),
-        ('Permissões', {'fields': ('is_staff', 'is_superuser')}),
     )
     add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'nome', 'cpf', 'cargo', 'salario', 'is_staff', 'is_superuser')}
-        ),
+        ('Autenticação', {'fields': ('email',)}),
+        ('Informações Pessoais', {'fields': ('nome', 'cpf', 'cargo', 'salario')}),
     )
-    list_filter = ('is_staff', 'is_superuser')
+
+    list_filter = ('nome', 'cargo', 'date_joined')
 
 class DentistaAdmin(UserAdmin):
     add_form = DentistaCreationForm
-    model = MedicoDentista
-    list_display = ('email', 'nome', 'cpf', 'cargo', 'especializacao', 'is_staff', 'is_superuser')
+    model = Dentista
+    list_display = ('email', 'nome', 'cpf', 'cargo', 'especializacao', 'date_joined')
     search_fields = ('email', 'nome', 'cpf')
     ordering = ('email',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Informações Pessoais', {'fields': ('nome', 'cpf', 'cargo', 'salario')}),
-        ('Permissões', {'fields': ('is_staff', 'is_superuser')}),
+        ('Autenticação', {'fields': ('email',)}),
+        ('Informações Pessoais', {'fields': ('nome', 'cpf', 'cargo', 'salario', 'especializacao')}),
     )
     add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'nome', 'cpf', 'cargo', 'especializacao', 'salario', 'is_staff', 'is_superuser')}
-        ),
+        ('Autenticação', {'fields': ('email',)}),
+        ('Informações Pessoais', {'fields': ('nome', 'cpf', 'cargo', 'salario', 'especializacao')}),
     )
-    list_filter = ('is_staff', 'is_superuser')
 
-admin.site.register(Funcionario, FuncionarioAdmin)
-admin.site.register(MedicoDentista, DentistaAdmin)
-admin.site.register(Recepcionista, FuncionarioAdmin)
-admin.site.register(Gestor, GestorAdmin)
-admin.site.register(Paciente)
-admin.site.register(Consulta)
+    list_filter = ('nome', 'cargo', 'date_joined')
+
+class RecepcionistaAdmin(UserAdmin):
+    add_form = RecepcionistaCreationForm
+    model = Recepcionista
+    list_display = ('email', 'nome', 'cpf', 'cargo', 'date_joined')
+    search_fields = ('email', 'nome', 'cpf')
+    ordering = ('email',)
+    fieldsets = (
+        ('Autenticação', {'fields': ('email', 'password')}),
+        ('Informações Pessoais', {'fields': ('nome', 'cpf', 'cargo', 'salario')}),
+    )
+    add_fieldsets = (
+        ('Autenticação', {'fields': ('email',)}),
+        ('Informações Pessoais', {'fields': ('nome', 'cpf', 'cargo', 'salario')}),
+    )
+    
+    list_filter = ('nome', 'cargo', 'date_joined')

@@ -1,11 +1,11 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Funcionario, Gestor, MedicoDentista
+from .models import Gestor, Dentista, Recepcionista
 
-class FuncionarioCreationForm(forms.ModelForm):
+class RecepcionistaCreationForm(forms.ModelForm):
     class Meta:
-        model = Funcionario
-        fields = ('email', 'nome', 'cpf', 'cargo', 'salario', 'is_staff', 'is_superuser')
+        model = Recepcionista
+        fields = ('email', 'nome', 'cpf', 'cargo', 'salario')
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -17,19 +17,21 @@ class FuncionarioCreationForm(forms.ModelForm):
 class GestorCreationForm(forms.ModelForm):
     class Meta:
         model = Gestor
-        fields = ('email', 'nome', 'cpf', 'cargo', 'salario', 'is_staff', 'is_superuser')
+        fields = ('email', 'nome', 'cpf', 'cargo', 'salario')
 
     def save(self, commit=True):
         user = super().save(commit=False)
         user.set_unusable_password()  # Define uma senha inutilizável
+        user.is_staff = True
+        user.is_superuser = True
         if commit:
             user.save()
         return user
 
 class DentistaCreationForm(forms.ModelForm):
     class Meta:
-        model = MedicoDentista
-        fields = ('email', 'nome', 'cpf', 'cargo', 'especializacao', 'salario', 'is_staff', 'is_superuser')
+        model = Dentista
+        fields = ('email', 'nome', 'cpf', 'cargo', 'especializacao', 'salario')
 
     def save(self, commit=True):
         user = super().save(commit=False)

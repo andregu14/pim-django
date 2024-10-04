@@ -105,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'clinicaMedica.backends.EmailBackend',
 ]
 
 AUTH_USER_MODEL = 'clinicaMedica.Funcionario'
