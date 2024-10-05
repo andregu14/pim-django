@@ -7,6 +7,31 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from datetime import datetime
 
+def validar_cpf(cpf):
+    cpf = ''.join(filter(str.isdigit, cpf))
+    
+    if len(cpf) != 11:
+        return False
+    
+    if cpf == cpf[0] * 11:
+        return False
+    
+    soma = sum(int(cpf[i]) * (10 - i) for i in range(9))
+    digito = 11 - (soma % 11)
+    if digito > 9:
+        digito = 0
+    if int(cpf[9]) != digito:
+        return False
+    
+    soma = sum(int(cpf[i]) * (11 - i) for i in range(10))
+    digito = 11 - (soma % 11)
+    if digito > 9:
+        digito = 0
+    if int(cpf[10]) != digito:
+        return False
+    
+    return True
+
 # Create your views here.
 def index(request):
     if request.method == 'POST':
@@ -78,6 +103,12 @@ def cadastrar_paciente(request):
             messages.error(request, 'Formato de data inválido. Use YYYY-MM-DD.', 'danger')
             return render(request, 'cadastrar-paciente.html')
 
+        # Remove formatação do CPF
+        cpf_limpo = ''.join(filter(str.isdigit, cpf))
+        if not validar_cpf(cpf_limpo):
+            messages.error(request, 'CPF inválido', 'danger')
+            return render(request, 'cadastrar-paciente.html')    
+
         # Verifica se o cpf ou email já existem
         if Paciente.objects.filter(cpf=cpf).exists():
             messages.error(request, 'CPF já cadastrado', 'danger')
@@ -112,3 +143,7 @@ def funcionario(request):
 @login_required
 def faq(request):
     return render(request, 'pages-faq.html')
+
+@login_required
+def contato(request):
+    return render(request, 'pages-contact.html')

@@ -45,20 +45,22 @@ class Funcionario(AbstractBaseUser, PermissionsMixin):
     def first_two_names(self):
         parts = self.nome.split()
         if len(parts) == 1:
-            return self.nome
+            name = self.nome
         elif len(parts) == 2:
-            return f"{parts[0]} {parts[1]}"
+            name = f"{parts[0]} {parts[1]}"
         else:
-            return f"{parts[0]} {parts[-1]}"
+            name = f"{parts[0]} {parts[-1]}"
+        
+        # Verifica se o funcionário é um Dentista
+        if hasattr(self, 'dentista'):
+            return f"Dr. {name}"
+        return name
 
     def __str__(self):
-        return self.nome
+        return self.first_two_names()
 
 class Dentista(Funcionario):
     especializacao = models.CharField(max_length=60)
-
-    def __str__(self):
-        return self.nome
 
 class Recepcionista(Funcionario):
     pass

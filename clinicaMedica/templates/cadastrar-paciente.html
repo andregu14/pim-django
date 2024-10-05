@@ -276,7 +276,7 @@
                 class="rounded-circle"
               />
               <span class="d-none d-md-block dropdown-toggle ps-2"
-                >{{ user.first_name }}</span
+                >{{ user.first_two_names }}</span
               > </a
             ><!-- Fim do Ícone de Imagem de Perfil -->
 
@@ -284,7 +284,7 @@
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
             >
               <li class="dropdown-header">
-                <h6>{{ user.first_name }}</h6>
+                <h6>{{ user.first_two_names }}</h6>
                 <span>{{ user.cargo }}</span>
               </li>
               <li>
@@ -443,36 +443,14 @@
         <!-- Fim da Navegação da Página de Perguntas Frequentes -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-contact.html">
+          <a class="nav-link collapsed" href="{% url 'contato' %}">
             <i class="bi bi-envelope"></i>
             <span>Contato</span>
           </a>
         </li>
         <!-- Fim da Navegação da Página de Contato -->
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="primeiro-acesso.html">
-            <i class="bi bi-card-list"></i>
-            <span>Primeiro Acesso</span>
-          </a>
-        </li>
-        <!-- Fim da Navegação da Página de Registros -->
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-login.html">
-            <i class="bi bi-box-arrow-in-right"></i>
-            <span>Login</span>
-          </a>
-        </li>
-        <!-- Fim da Navegação da Página de Login -->
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-error-404.html">
-            <i class="bi bi-dash-circle"></i>
-            <span>Erro 404</span>
-          </a>
-        </li>
-        <!-- Fim da Navegação da Página de Erro 404 -->
+        
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'logout' %}">
@@ -514,7 +492,7 @@
               <div class="card-body">
                 <h5 class="card-title">Cadastrar Paciente</h5>
                 <!-- Floating Labels Form -->
-                <form class="row g-3" method="post">
+                <form class="row g-3 needs-validation" novalidate method="post">
                   {% csrf_token %}
                   <div class="col-md-12">
                     <div class="form-floating">
@@ -524,9 +502,14 @@
                         id="floatingName"
                         name="nome"
                         placeholder="Nome Completo"
+                        required
                       />
                       <label for="floatingName">Nome Completo</label>
+                      <div class="invalid-feedback">
+                        Por favor preencha o nome completo
+                      </div>
                     </div>
+
                   </div>
                   <div class="col-md-6">
                     <div class="form-floating">
@@ -536,8 +519,12 @@
                         id="floatingEmail"
                         name="email"
                         placeholder="Email"
+                        required
                       />
                       <label for="floatingEmail">Email</label>
+                      <div class="invalid-feedback">
+                        Por favor preencha o email
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -548,8 +535,13 @@
                         id="floatingCpf"
                         name="cpf"
                         placeholder="CPF"
+                        maxlength="14"
+                        required
                       />
                       <label for="floatingCpf">CPF</label>
+                      <div class="invalid-feedback">
+                        Por favor preencha um CPF válido
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -560,8 +552,12 @@
                         id="floatingEndereco"
                         name="endereco"
                         style="height: 60px"
+                        required
                       ></textarea>
                       <label for="floatingEndereco">Endereço</label>
+                      <div class="invalid-feedback">
+                        Por favor preencha o endereço
+                      </div>
                     </div>
                   </div>
                   
@@ -579,6 +575,9 @@
                           required
                         />
                         <label for="floatingDate">Data de Nascimento</label>
+                        <div class="invalid-feedback">
+                          Por favor preencha uma data válida
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -590,8 +589,12 @@
                         id="floatingEstado"
                         name="estado"
                         placeholder="Estado"
+                        required
                       />
-                      <label for="floatingEstado">Estado</label>
+                      <label for="floatingEstado">Cidade</label>
+                      <div class="invalid-feedback">
+                        Por favor preencha a cidade/estado
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-2">
@@ -615,8 +618,12 @@
                         id="floatingTelefone"
                         name="telefone"
                         placeholder="Telefone"
+                        required
                       />
                       <label for="floatingTelefone">Telefone</label>
+                      <div class="invalid-feedback">
+                        Por favor um número de telefone válido
+                      </div>
                     </div>
                   </div>
                   <div class="text-center">
@@ -758,6 +765,13 @@
         }
     });
     </script>
+    <!-- Script formatação cpf  --> 
+    <script>
+      document.getElementById('floatingCpf').addEventListener('input', function (e) {
+          var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,3})(\d{0,2})/);
+          e.target.value = !x[2] ? x[1] : x[1] + '.' + x[2] + (x[3] ? '.' + x[3] : '') + (x[4] ? '-' + x[4] : '');
+      });
+      </script>
 
     <!-- Template Main JS File -->
     <script src="{% static 'js/main.js' %}"></script>

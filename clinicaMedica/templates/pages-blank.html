@@ -278,7 +278,7 @@
               <li>
                 <a
                   class="dropdown-item d-flex align-items-center"
-                  href="users-profile.html"
+                  href="{% url 'perfil' %}.html"
                 >
                   <i class="bi bi-person"></i>
                   <span>Meu Perfil</span>
@@ -291,7 +291,7 @@
               <li>
                 <a
                   class="dropdown-item d-flex align-items-center"
-                  href="users-profile.html"
+                  href="{% url 'perfil' %}.html"
                 >
                   <i class="bi bi-gear"></i>
                   <span>Configurações</span>
@@ -304,7 +304,7 @@
               <li>
                 <a
                   class="dropdown-item d-flex align-items-center"
-                  href="pages-faq.html"
+                  href="{% url 'faq' %}"
                 >
                   <i class="bi bi-question-circle"></i>
                   <span>Precisa de ajuda?</span>
@@ -342,7 +342,7 @@
         <!-- Fim da Navegação do Dashboard -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="users-profile.html">
+          <a class="nav-link collapsed" href="{% url 'perfil' %}.html">
             <i class="bi bi-person"></i>
             <span>Perfil</span>
           </a>
@@ -396,13 +396,13 @@
             data-bs-parent="#sidebar-nav"
           >
             <li>
-              <a href="procurar-paciente.html">
+              <a href="{% url 'procurar-paciente' %}">
                 <i class="bi bi-circle-fill"></i>
                 <span>Procurar Paciente</span>
               </a>
             </li>
             <li>
-              <a href="cadastrar-paciente.html">
+              <a href="{% url 'cadastrar-paciente' %}">
                 <i class="bi bi-circle-fill"></i>
                 <span>Cadastrar Paciente</span>
               </a>
@@ -411,7 +411,7 @@
         </li>
         <!-- Fim da Navegação do menu de paciente-->
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages.funcionario.html">
+          <a class="nav-link collapsed" href="{% url 'funcionario' %}">
             <i class="bi bi-briefcase"></i>
             <span>Funcionários</span>
           </a>
@@ -419,7 +419,7 @@
         <!-- Fim da Navegação da Página de Perfil -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-faq.html">
+          <a class="nav-link collapsed" href="{% url 'faq' %}">
             <i class="bi bi-question-circle"></i>
             <span>Perguntas Frequentes</span>
           </a>
@@ -427,36 +427,14 @@
         <!-- Fim da Navegação da Página de Perguntas Frequentes -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-contact.html">
+          <a class="nav-link collapsed" href="{% url 'contato' %}">
             <i class="bi bi-envelope"></i>
             <span>Contato</span>
           </a>
         </li>
         <!-- Fim da Navegação da Página de Contato -->
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="primeiro-acesso.html">
-            <i class="bi bi-card-list"></i>
-            <span>Primeiro Acesso</span>
-          </a>
-        </li>
-        <!-- Fim da Navegação da Página de Registros -->
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-login.html">
-            <i class="bi bi-box-arrow-in-right"></i>
-            <span>Login</span>
-          </a>
-        </li>
-        <!-- Fim da Navegação da Página de Login -->
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-error-404.html">
-            <i class="bi bi-dash-circle"></i>
-            <span>Erro 404</span>
-          </a>
-        </li>
-        <!-- Fim da Navegação da Página de Erro 404 -->
+        
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="pages-login.html">
