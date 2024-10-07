@@ -335,15 +335,15 @@
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'dashboard' %}">
-            <i class="bi bi-grid"></i>
+            <i class="bi bi-grid" style="color: #007bff"></i>
             <span>Dashboard</span>
           </a>
         </li>
         <!-- Fim da Navegação do Dashboard -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="{% url 'perfil' %}.html">
-            <i class="bi bi-person"></i>
+          <a class="nav-link collapsed" href="{% url 'perfil' %}">
+            <i class="bi bi-person" style="color: #28a745"></i>
             <span>Perfil</span>
           </a>
         </li>
@@ -356,8 +356,9 @@
             data-bs-target="#consultas-nav"
             data-bs-toggle="collapse"
           >
-            <i class="bi bi-calendar"></i><span>Consultas</span
-            ><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-calendar" style="color: #fd7e14"></i>
+            <span>Consultas</span>
+            <i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul
             id="consultas-nav"
@@ -366,20 +367,20 @@
           >
             <li>
               <a href="#">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-circle-fill" style="color: #6c757d"></i>
                 <span>Visualizar Consultas</span>
               </a>
             </li>
             <li>
               <a href="#">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-circle-fill" style="color: #6c757d"></i>
                 <span>Marcar Consultas</span>
               </a>
             </li>
           </ul>
         </li>
-
         <!-- Fim da Navegação do menu de consultas-->
+
         <li class="nav-item">
           <a
             href="#"
@@ -387,8 +388,9 @@
             data-bs-target="#pacientes-nav"
             data-bs-toggle="collapse"
           >
-            <i class="bi bi-people"></i><span>Pacientes</span
-            ><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-people" style="color: #17a2b8"></i>
+            <span>Pacientes</span>
+            <i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul
             id="pacientes-nav"
@@ -397,39 +399,47 @@
           >
             <li>
               <a href="{% url 'procurar-paciente' %}">
-                <i class="bi bi-circle-fill"></i>
+                <i
+                  class="bi bi-search"
+                  style="color: #17a2b8; font-size: 15px"
+                ></i>
                 <span>Procurar Paciente</span>
               </a>
             </li>
             <li>
               <a href="{% url 'cadastrar-paciente' %}">
-                <i class="bi bi-circle-fill"></i>
+                <i
+                  class="bi bi-card-list"
+                  style="color: #17a2b8; font-size: 15px"
+                ></i>
                 <span>Cadastrar Paciente</span>
               </a>
             </li>
           </ul>
         </li>
         <!-- Fim da Navegação do menu de paciente-->
+
         {% if user.is_superuser %}
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'admin:index' %}">
-            <i class="bi bi-gear"></i>
+            <i class="bi bi-gear" style="color: #6f42c1"></i>
             <span>Administração</span>
           </a>
         </li>
         {% endif %}
         <!-- Fim da Navegação da Página de admin -->
+
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'funcionario' %}">
-            <i class="bi bi-briefcase"></i>
+            <i class="bi bi-briefcase" style="color: #20c997"></i>
             <span>Funcionários</span>
           </a>
         </li>
-        <!-- Fim da Navegação da Página de Perfil -->
+        <!-- Fim da Navegação da Página de funcionario -->
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'faq' %}">
-            <i class="bi bi-question-circle"></i>
+            <i class="bi bi-question-circle" style="color: #17a2b8"></i>
             <span>Perguntas Frequentes</span>
           </a>
         </li>
@@ -437,17 +447,15 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'contato' %}">
-            <i class="bi bi-envelope"></i>
+            <i class="bi bi-envelope" style="color: #007bff"></i>
             <span>Contato</span>
           </a>
         </li>
         <!-- Fim da Navegação da Página de Contato -->
 
-        
-
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-login.html">
-            <i class="bi bi-box-arrow-right"></i>
+          <a class="nav-link collapsed" href="{% url 'logout' %}">
+            <i class="bi bi-box-arrow-right" style="color: #dc3545"></i>
             <span>Sair</span>
           </a>
         </li>
