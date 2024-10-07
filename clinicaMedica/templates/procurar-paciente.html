@@ -487,13 +487,14 @@
                 id="searchInput"
               />
             </div>
-            <table class="table table-hover">
+            <table class="table table-striped">
               <thead>
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Paciente</th>
                   <th scope="col">CPF</th>
                   <th scope="col">Email</th>
+                  <th scope="col">Idade</th>
                   <th scope="col">Telefone</th>
                 </tr>
               </thead>
@@ -504,6 +505,7 @@
                   <td class="name">{{ paciente.nome }}</td>
                   <td class="cpf">{{ paciente.cpf }}</td>
                   <td>{{ paciente.email }}</td>
+                  <td style="text-align:center">{{ paciente.calcular_idade }}</td>
                   <td>{{ paciente.telefone }}</td>
                 </tr>
                 {% endfor %}

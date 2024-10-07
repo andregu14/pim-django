@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.contrib.auth.hashers import make_password
 from django.utils import timezone
+from datetime import date
 
 class FuncionarioManager(BaseUserManager):
     def create_user(self, email, cpf, nome, cargo, salario, password=None, **extra_fields):
@@ -84,6 +85,10 @@ class Paciente(models.Model):
     estado = models.CharField(max_length=50, blank=False)
     cep = models.CharField(max_length=9, blank=False)
     date_joined = models.DateTimeField(verbose_name="Data do Cadastro", default=timezone.now)
+
+    def calcular_idade(self):
+        hoje = date.today()
+        return hoje.year - self.data_de_nascimento.year - ((hoje.month, hoje.day) < (self.data_de_nascimento.month, self.data_de_nascimento.day))
 
     def __str__(self):
         return self.nome
