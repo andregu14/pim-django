@@ -20,7 +20,7 @@ from clinicaMedica import views
 
 urlpatterns = [
     path("", views.dashboard, name="dashboard"),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path("login/", views.funcionario_login, name='login'),
     path('primeiro-acesso/', views.primeiro_acesso, name='primeiro_acesso'),
     path('dashboard/', views.dashboard, name='dashboard'),

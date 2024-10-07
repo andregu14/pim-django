@@ -153,7 +153,12 @@ def cadastrar_paciente(request):
 
 @login_required
 def funcionario(request):
-    return render(request, 'pages.funcionario.html')
+    funcionarios_list = Funcionario.objects.all()
+    paginator = Paginator(funcionarios_list, 10)  # Mostra 10 pacientes por página
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'pages.funcionario.html', {'page_obj': page_obj})
 
 @login_required
 def faq(request):

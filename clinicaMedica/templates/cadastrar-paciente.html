@@ -429,6 +429,15 @@
           </ul>
         </li>
         <!-- Fim da Navegação do menu de paciente-->
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'admin:index' %}">
+            <i class="bi bi-gear"></i>
+            <span>Administração</span>
+          </a>
+        </li>
+        {% endif %}
+        <!-- Fim da Navegação da Página de admin -->
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'funcionario' %}">
             <i class="bi bi-briefcase"></i>

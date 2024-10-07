@@ -331,7 +331,10 @@
               </li>
 
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="{% url 'logout' %}"
+                >
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sair</span>
                 </a>
@@ -426,13 +429,22 @@
           </ul>
         </li>
         <!-- Fim da Navegação do menu de paciente-->
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'admin:index' %}">
+            <i class="bi bi-gear"></i>
+            <span>Administração</span>
+          </a>
+        </li>
+        {% endif %}
+        <!-- Fim da Navegação da Página de admin -->
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'funcionario' %}">
             <i class="bi bi-briefcase"></i>
             <span>Funcionários</span>
           </a>
         </li>
-        <!-- Fim da Navegação da Página de Perfil -->
+        <!-- Fim da Navegação da Página de funcionario -->
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'faq' %}">
@@ -450,8 +462,6 @@
         </li>
         <!-- Fim da Navegação da Página de Contato -->
 
-        
-
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'logout' %}">
             <i class="bi bi-box-arrow-right"></i>
@@ -468,7 +478,9 @@
         <h1>Dashboard</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Início</a></li>
+            <li class="breadcrumb-item">
+              <a href="{% url 'dashboard' %}">Início</a>
+            </li>
             <li class="breadcrumb-item active">Dashboard</li>
           </ol>
         </nav>

@@ -331,7 +331,10 @@
               </li>
 
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="{% url 'logout' %}"
+                >
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sair</span>
                 </a>
@@ -426,6 +429,15 @@
           </ul>
         </li>
         <!-- Fim da Navegação do menu de paciente-->
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'admin:index' %}">
+            <i class="bi bi-gear"></i>
+            <span>Administração</span>
+          </a>
+        </li>
+        {% endif %}
+        <!-- Fim da Navegação da Página de admin -->
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'funcionario' %}">
             <i class="bi bi-briefcase"></i>
@@ -450,8 +462,6 @@
         </li>
         <!-- Fim da Navegação da Página de Contato -->
 
-        
-
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'logout' %}">
             <i class="bi bi-box-arrow-right"></i>
@@ -468,7 +478,9 @@
         <h1>Pacientes</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Início</a></li>
+            <li class="breadcrumb-item">
+              <a href="{% url 'dashboard' %}">Início</a>
+            </li>
             <li class="breadcrumb-item active">Pacientes</li>
           </ol>
         </nav>
@@ -505,7 +517,9 @@
                   <td class="name">{{ paciente.nome }}</td>
                   <td class="cpf">{{ paciente.cpf }}</td>
                   <td>{{ paciente.email }}</td>
-                  <td style="text-align:center">{{ paciente.calcular_idade }}</td>
+                  <td style="text-align: center">
+                    {{ paciente.calcular_idade }}
+                  </td>
                   <td>{{ paciente.telefone }}</td>
                 </tr>
                 {% endfor %}
@@ -513,19 +527,31 @@
             </table>
             <nav aria-label="Page navigation" class="pt-3">
               <ul class="pagination justify-content-center">
-                  {% if page_obj.has_previous %}
-                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
-                  {% endif %}
-                  {% for num in page_obj.paginator.page_range %}
-                  <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-                      <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                  </li>
-                  {% endfor %}
-                  {% if page_obj.has_next %}
-                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a></li>
-                  {% endif %}
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    href="?page={{ page_obj.previous_page_number }}"
+                    >Anterior</a
+                  >
+                </li>
+                {% endif %} {% for num in page_obj.paginator.page_range %}
+                <li
+                  class="page-item {% if page_obj.number == num %}active{% endif %}"
+                >
+                  <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %} {% if page_obj.has_next %}
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    href="?page={{ page_obj.next_page_number }}"
+                    >Próximo</a
+                  >
+                </li>
+                {% endif %}
               </ul>
-          </nav>
+            </nav>
           </div>
         </div>
       </div>

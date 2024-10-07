@@ -426,6 +426,15 @@
           </ul>
         </li>
         <!-- Fim da Navegação do menu de paciente-->
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'admin:index' %}">
+            <i class="bi bi-gear"></i>
+            <span>Administração</span>
+          </a>
+        </li>
+        {% endif %}
+        <!-- Fim da Navegação da Página de admin -->
         <li class="nav-item">
           <a class="nav-link" href="{% url 'funcionario' %}">
             <i class="bi bi-briefcase"></i>
@@ -483,53 +492,59 @@
               <input
                 type="text"
                 class="form-control"
-                placeholder="Pesquisar Funcionário"
+                placeholder="Pesquisar Funcionário ou CPF"
                 id="searchInput"
               />
             </div>
-
-            <table class="table table-hover">
+            <table class="table table-striped">
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Funcionário</th>
-                  <th scope="col">Cargo</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">CPF</th>
                   <th scope="col">Email</th>
+                  <th scope="col">Cargo</th>
                 </tr>
               </thead>
               <tbody id="funcionarioList">
+                {% for funcionario in page_obj %}
                 <tr>
-                  <th scope="row"><a href="#">#2457</a></th>
-                  <td class="name">João Silva</td>
-                  <td>Dentista</td>
-                  <td>joao.silva@odontosmart.com</td>
+                  <th scope="row"><a href="#">{{ funcionario.id }}</a></th>
+                  <td class="name">{{ funcionario.nome }}</td>
+                  <td class="cpf">{{ funcionario.cpf }}</td>
+                  <td>{{ funcionario.email }}</td>
+                  <td>{{ funcionario.cargo }}</td>
                 </tr>
-                <tr>
-                  <th scope="row"><a href="#">#2147</a></th>
-                  <td class="name">Maria Oliveira</td>
-                  <td>Recepcionista</td>
-                  <td>maria.oliveira@odontosmart.com</td>
-                </tr>
-                <tr>
-                  <th scope="row"><a href="#">#2049</a></th>
-                  <td class="name">Carlos Santos</td>
-                  <td>Gestor</td>
-                  <td>carlos.santos@odontosmart.com</td>
-                </tr>
-                <tr>
-                  <th scope="row"><a href="#">#2644</a></th>
-                  <td class="name">Ana Souza</td>
-                  <td>Dentista</td>
-                  <td>ana.souza@odontosmart.com</td>
-                </tr>
-                <tr>
-                  <th scope="row"><a href="#">#2645</a></th>
-                  <td class="name">Pedro Ferreira</td>
-                  <td>Recepcionista</td>
-                  <td>pedro.ferreira@odontosmart.com</td>
-                </tr>
+                {% endfor %}  
               </tbody>
             </table>
+            <nav aria-label="Page navigation" class="pt-3">
+              <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    href="?page={{ page_obj.previous_page_number }}"
+                    >Anterior</a
+                  >
+                </li>
+                {% endif %} {% for num in page_obj.paginator.page_range %}
+                <li
+                  class="page-item {% if page_obj.number == num %}active{% endif %}"
+                >
+                  <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %} {% if page_obj.has_next %}
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    href="?page={{ page_obj.next_page_number }}"
+                    >Próximo</a
+                  >
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
