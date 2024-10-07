@@ -465,7 +465,7 @@
 
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Funcionários</h1>
+        <h1>Pacientes</h1>
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Início</a></li>
@@ -494,41 +494,36 @@
                   <th scope="col">Paciente</th>
                   <th scope="col">CPF</th>
                   <th scope="col">Email</th>
+                  <th scope="col">Telefone</th>
                 </tr>
               </thead>
               <tbody id="patientList">
+                {% for paciente in page_obj %}
                 <tr>
-                  <th scope="row"><a href="#">#2457</a></th>
-                  <td class="name">Lucas Ferreira</td>
-                  <td class="cpf">762.801.650-27</td>
-                  <td>lucas.ferreira@example.com</td>
+                  <th scope="row"><a href="#">{{ paciente.id }}</a></th>
+                  <td class="name">{{ paciente.nome }}</td>
+                  <td class="cpf">{{ paciente.cpf }}</td>
+                  <td>{{ paciente.email }}</td>
+                  <td>{{ paciente.telefone }}</td>
                 </tr>
-                <tr>
-                  <th scope="row"><a href="#">#2147</a></th>
-                  <td class="name">Fernanda Dias</td>
-                  <td class="cpf">147.313.170-70</td>
-                  <td>fernanda.dias@example.com</td>
-                </tr>
-                <tr>
-                  <th scope="row"><a href="#">#2049</a></th>
-                  <td class="name">Ricardo Ramos</td>
-                  <td class="cpf">222.812.810-43</td>
-                  <td>ricardo.ramos@example.com</td>
-                </tr>
-                <tr>
-                  <th scope="row"><a href="#">#2644</a></th>
-                  <td class="name">Juliana Santos</td>
-                  <td class="cpf">341.864.660-33</td>
-                  <td>juliana.santos@example.com</td>
-                </tr>
-                <tr>
-                  <th scope="row"><a href="#">#2645</a></th>
-                  <td class="name">Pedro Martins</td>
-                  <td class="cpf">209.364.550-55</td>
-                  <td>pedro.martins@example.com</td>
-                </tr>
+                {% endfor %}
               </tbody>
             </table>
+            <nav aria-label="Page navigation" class="pt-3">
+              <ul class="pagination justify-content-center">
+                  {% if page_obj.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+                  {% endif %}
+                  {% for num in page_obj.paginator.page_range %}
+                  <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                      <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                  </li>
+                  {% endfor %}
+                  {% if page_obj.has_next %}
+                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a></li>
+                  {% endif %}
+              </ul>
+          </nav>
           </div>
         </div>
       </div>

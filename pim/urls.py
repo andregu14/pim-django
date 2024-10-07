@@ -19,9 +19,9 @@ from django.urls import path
 from clinicaMedica import views
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", views.dashboard, name="dashboard"),
     path('admin/', admin.site.urls),
-    path("login/", views.index, name='login'),
+    path("login/", views.funcionario_login, name='login'),
     path('primeiro-acesso/', views.primeiro_acesso, name='primeiro_acesso'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('logout/', views.logout_view, name='logout'),

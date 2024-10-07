@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from datetime import datetime
+from django.core.paginator import Paginator
 
 def validar_cpf(cpf):
     cpf = ''.join(filter(str.isdigit, cpf))
@@ -33,7 +34,7 @@ def validar_cpf(cpf):
     return True
 
 # Create your views here.
-def index(request):
+def funcionario_login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         senha = request.POST.get('senha')
@@ -42,7 +43,15 @@ def index(request):
             login(request, funcionario)
             return redirect('dashboard')
         else:
-            messages.error(request, 'Email ou senha incorretos', 'danger')
+            try:
+                primeiro_acesso = Funcionario.objects.get(email=email)
+                if primeiro_acesso.is_first_login:
+                    messages.warning(request, 'Primeiro login, cadastre sua senha')
+                else:
+                    messages.error(request, 'Email ou senha incorretos', 'danger')
+            except Funcionario.DoesNotExist:    
+                messages.error(request, 'Email ou senha incorretos', 'danger')
+
     return render(request, 'pages-login.html')
 
 def primeiro_acesso(request):
@@ -84,7 +93,12 @@ def perfil(request):
 
 @login_required
 def procurar_paciente(request):
-    return render(request, 'procurar-paciente.html')
+    pacientes_list = Paciente.objects.all()
+    paginator = Paginator(pacientes_list, 10)  # Mostra 10 pacientes por página
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'procurar-paciente.html', {'page_obj': page_obj})
 
 @login_required
 def cadastrar_paciente(request):
@@ -94,6 +108,7 @@ def cadastrar_paciente(request):
         email = request.POST.get('email')
         telefone = request.POST.get('telefone')
         endereco = request.POST.get('endereco')
+        sexo = request.POST.get('sexo')
         estado = request.POST.get('estado')
         cep = request.POST.get('cep')
         data_de_nascimento_str = request.POST.get('data_de_nascimento')
@@ -126,14 +141,14 @@ def cadastrar_paciente(request):
                 telefone=telefone,
                 endereco=endereco,
                 data_de_nascimento=data_de_nascimento,
+                sexo=sexo,
                 estado=estado,
                 cep=cep
             )
             paciente.save()
             messages.success(request, 'Paciente cadastrado com sucesso')
-        except IntegrityError:
-            messages.error(request, 'Erro ao cadastrar paciente. Verifique os dados e tente novamente', 'danger')
-            return render(request, 'cadastrar-paciente.html')
+        except:
+            pass
     return render(request, 'cadastrar-paciente.html')
 
 @login_required

@@ -19,7 +19,6 @@ class FuncionarioManager(BaseUserManager):
         return self.create_user(email, cpf, nome, cargo, salario, password, **extra_fields)
 
 class Funcionario(AbstractBaseUser, PermissionsMixin):
-    id_funcionario = models.AutoField(primary_key=True)
     cpf = models.CharField(max_length=11, unique=True)
     email = models.EmailField(unique=True, blank=False)
     salario = models.DecimalField(max_digits=10, decimal_places=2)
@@ -81,14 +80,15 @@ class Paciente(models.Model):
     telefone = models.CharField(max_length=50, blank=False)
     endereco = models.CharField(max_length=50, blank=False)
     data_de_nascimento = models.DateField(verbose_name="Data de Nascimento", blank=False)
+    sexo = models.CharField(max_length=9, blank=False)
     estado = models.CharField(max_length=50, blank=False)
     cep = models.CharField(max_length=9, blank=False)
+    date_joined = models.DateTimeField(verbose_name="Data do Cadastro", default=timezone.now)
 
     def __str__(self):
         return self.nome
 
 class Consulta(models.Model):
-    id_consulta = models.AutoField(primary_key=True)
     data_hora = models.DateTimeField(verbose_name="Data e Hora", blank=False)
     status = models.CharField(max_length=20)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
