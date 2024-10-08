@@ -1169,6 +1169,35 @@ h6 {
 }
 
 /*--------------------------------------------------------------
+# Lista de Funcionarios
+--------------------------------------------------------------*/
+.funcionario-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.funcionario-card {
+  transition: all 0.3s;
+}
+.funcionario-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/*--------------------------------------------------------------
+# Lista de Pacientes
+--------------------------------------------------------------*/
+
+.patient-card {
+  transition: transform 0.2s;
+}
+.patient-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/*--------------------------------------------------------------
 # Error 404
 --------------------------------------------------------------*/
 .error-404 {

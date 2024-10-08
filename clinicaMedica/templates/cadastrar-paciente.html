@@ -489,29 +489,21 @@
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{% url 'dashboard' %}">Início </a>
+              <a href="{% url 'dashboard' %}">Início</a>
             </li>
             <li class="breadcrumb-item active">Cadastrar Paciente</li>
           </ol>
         </nav>
       </div>
       <!-- End Page Title -->
-
+    
       {% if messages %} {% for message in messages %}
-      <div
-        class="alert alert-{{ message.tags }} alert-dismissible fade show"
-        role="alert"
-      >
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
         {{ message }}
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       {% endfor %} {% endif %}
-
+    
       <section class="section">
         <div class="row">
           <div class="col-lg-12">
@@ -523,155 +515,72 @@
                   {% csrf_token %}
                   <div class="col-md-12">
                     <div class="form-floating">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="floatingName"
-                        name="nome"
-                        placeholder="Nome Completo"
-                        required
-                      />
+                      <input type="text" class="form-control" id="floatingName" name="nome" placeholder="Nome Completo" required />
                       <label for="floatingName">Nome Completo</label>
-                      <div class="invalid-feedback">
-                        Por favor preencha o nome completo
-                      </div>
+                      <div class="invalid-feedback">Por favor preencha o nome completo</div>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-floating">
-                      <input
-                        type="email"
-                        class="form-control"
-                        id="floatingEmail"
-                        name="email"
-                        placeholder="Email"
-                        required
-                      />
+                      <input type="email" class="form-control" id="floatingEmail" name="email" placeholder="Email" required />
                       <label for="floatingEmail">Email</label>
-                      <div class="invalid-feedback">
-                        Por favor preencha o email
-                      </div>
+                      <div class="invalid-feedback">Por favor preencha o email</div>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-floating">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="floatingCpf"
-                        name="cpf"
-                        placeholder="CPF"
-                        maxlength="14"
-                        required
-                      />
+                      <input type="text" class="form-control" id="floatingCpf" name="cpf" placeholder="CPF" maxlength="14" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" />
                       <label for="floatingCpf">CPF</label>
-                      <div class="invalid-feedback">
-                        Por favor preencha um CPF válido
-                      </div>
+                      <div class="invalid-feedback">Por favor preencha um CPF válido</div>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-floating">
-                      <textarea
-                        class="form-control"
-                        placeholder="Endereço"
-                        id="floatingEndereco"
-                        name="endereco"
-                        style="height: 60px"
-                        required
-                      ></textarea>
+                      <textarea class="form-control" placeholder="Endereço" id="floatingEndereco" name="endereco" style="height: 60px" required></textarea>
                       <label for="floatingEndereco">Endereço</label>
-                      <div class="invalid-feedback">
-                        Por favor preencha o endereço
-                      </div>
+                      <div class="invalid-feedback">Por favor preencha o endereço</div>
                     </div>
                   </div>
-
                   <div class="col-md-3">
-                    <div class="col-md-12">
-                      <div class="form-floating">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="floatingDate"
-                          name="data_de_nascimento"
-                          placeholder="Data de Nascimento"
-                          pattern="\d{4}-\d{2}-\d{2}"
-                          required
-                        />
-                        <label for="floatingDate">Data de Nascimento</label>
-                        <div class="invalid-feedback">
-                          Por favor preencha uma data válida
-                        </div>
-                      </div>
+                    <div class="form-floating">
+                      <input type="date" class="form-control" id="floatingDate" name="data_de_nascimento" placeholder="Data de Nascimento" pattern="\d{4}-\d{2}-\d{2}" required />
+                      <label for="floatingDate">Data de Nascimento</label>
+                      <div class="invalid-feedback">Por favor preencha uma data válida</div>
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-floating mb-12">
-                      <select
-                        class="form-select"
-                        id="floatingSelect"
-                        aria-label="Sexo"
-                        name="sexo"
-                        required
-                      >
+                      <select class="form-select" id="floatingSelect" aria-label="Sexo" name="sexo" required>
                         <option value="Masculino">Masculino</option>
                         <option value="Feminino">Feminino</option>
                       </select>
                       <label for="floatingSelect">Sexo</label>
-                      <div class="invalid-feedback">
-                        Por favor selecione o sexo
-                      </div>
+                      <div class="invalid-feedback">Por favor selecione o sexo</div>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-floating mb-3">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="floatingEstado"
-                        name="estado"
-                        placeholder="Estado"
-                        required
-                      />
+                      <input type="text" class="form-control" id="floatingEstado" name="estado" placeholder="Estado" required />
                       <label for="floatingEstado">Cidade</label>
-                      <div class="invalid-feedback">
-                        Por favor preencha a cidade/estado
-                      </div>
+                      <div class="invalid-feedback">Por favor preencha a cidade/estado</div>
                     </div>
                   </div>
                   <div class="col-md-2">
                     <div class="form-floating">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="floatingCep"
-                        name="cep"
-                        placeholder="CEP"
-                        maxlength="8"
-                      />
+                      <input type="text" class="form-control" id="floatingCep" name="cep" placeholder="CEP" maxlength="8" />
                       <label for="floatingCep">CEP</label>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-floating">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="floatingTelefone"
-                        name="telefone"
-                        placeholder="Telefone"
-                        required
-                      />
+                      <input type="text" class="form-control" id="floatingTelefone" name="telefone" placeholder="Telefone" required />
                       <label for="floatingTelefone">Telefone</label>
-                      <div class="invalid-feedback">
-                        Por favor um número de telefone válido
-                      </div>
+                      <div class="invalid-feedback">Por favor insira um número de telefone válido</div>
                     </div>
                   </div>
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary">
-                      Cadastrar
+                      <i class="bi bi-person-plus"></i> Cadastrar
                     </button>
                   </div>
                 </form>

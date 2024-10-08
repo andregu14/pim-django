@@ -94,7 +94,7 @@ def perfil(request):
 @login_required
 def procurar_paciente(request):
     pacientes_list = Paciente.objects.all()
-    paginator = Paginator(pacientes_list, 10)  # Mostra 10 pacientes por página
+    paginator = Paginator(pacientes_list, 12)  # Mostra 10 pacientes por página
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -154,7 +154,7 @@ def cadastrar_paciente(request):
 @login_required
 def funcionario(request):
     funcionarios_list = Funcionario.objects.all()
-    paginator = Paginator(funcionarios_list, 10)  # Mostra 10 pacientes por página
+    paginator = Paginator(funcionarios_list, 10)  # Mostra 10 funcionarios por página
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

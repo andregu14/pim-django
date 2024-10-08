@@ -331,7 +331,10 @@
               </li>
 
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="{% url 'logout' %}"
+                >
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sair</span>
                 </a>
@@ -485,90 +488,110 @@
         <h1>Funcionários</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Início</a></li>
+            <li class="breadcrumb-item">
+              <a href="{% url 'dashboard' %}">Início</a>
+            </li>
             <li class="breadcrumb-item active">Funcionários</li>
           </ol>
         </nav>
       </div>
-      <!-- End Page Title -->
 
-      <div class="col-12">
-        <div class="card recent-sales overflow-auto">
-          <div class="card-body">
-            <h5 class="card-title">Lista de Funcionários</h5>
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Pesquisar Funcionário ou CPF"
-                id="searchInput"
-              />
+      <div class="row mb-4">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-search me-2"></i>Pesquisar Funcionários
+              </h5>
+              <div class="input-group">
+                <span class="input-group-text"
+                  ><i class="bi bi-search"></i
+                ></span>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nome do funcionário ou CPF"
+                  id="searchInput"
+                />
+                <button class="btn btn-primary" type="button">Buscar</button>
+              </div>
             </div>
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Nome</th>
-                  <th scope="col">CPF</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Cargo</th>
-                </tr>
-              </thead>
-              <tbody id="funcionarioList">
-                {% for funcionario in page_obj %}
-                <tr>
-                  <th scope="row"><a href="#">{{ funcionario.id }}</a></th>
-                  <td class="name">{{ funcionario.nome }}</td>
-                  <td class="cpf">{{ funcionario.cpf }}</td>
-                  <td>{{ funcionario.email }}</td>
-                  <td>{{ funcionario.cargo }}</td>
-                </tr>
-                {% endfor %}  
-              </tbody>
-            </table>
-            <nav aria-label="Page navigation" class="pt-3">
-              <ul class="pagination justify-content-center">
-                {% if page_obj.has_previous %}
-                <li class="page-item">
-                  <a
-                    class="page-link"
-                    href="?page={{ page_obj.previous_page_number }}"
-                    >Anterior</a
-                  >
-                </li>
-                {% endif %} {% for num in page_obj.paginator.page_range %}
-                <li
-                  class="page-item {% if page_obj.number == num %}active{% endif %}"
-                >
-                  <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                </li>
-                {% endfor %} {% if page_obj.has_next %}
-                <li class="page-item">
-                  <a
-                    class="page-link"
-                    href="?page={{ page_obj.next_page_number }}"
-                    >Próximo</a
-                  >
-                </li>
-                {% endif %}
-              </ul>
-            </nav>
           </div>
         </div>
       </div>
+      <div class="row" id="funcionarioList">
+        {% for funcionario in page_obj %}
+        <div class="col-lg-6 mb-3">
+          <div class="card funcionario-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <img
+                  src="{% static 'img/profile-img.png' %}"
+                  alt="{{ funcionario.nome }}"
+                  class="funcionario-img me-4"
+                />
+                <div>
+                  <h5 class="card-title mb-1">{{ funcionario.nome }}</h5>
+                  <p class="card-text mb-1">
+                    <small class="text-muted"
+                      ><strong>CPF:</strong> {{ funcionario.cpf }}</small
+                    >
+                  </p>
+                  <p class="card-text mb-1">
+                    <small class="text-muted"
+                      ><strong>Email:</strong> {{ funcionario.email }}</small
+                    >
+                  </p>
+                  <p class="card-text">
+                    <small class="text-muted"
+                      ><strong>Cargo:</strong> {{ funcionario.cargo }}</small
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <nav aria-label="Page navigation" class="pt-3">
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ page_obj.previous_page_number }}"
+              >Anterior</a
+            >
+          </li>
+          {% endif %} {% for num in page_obj.paginator.page_range %}
+          <li
+            class="page-item {% if page_obj.number == num %}active{% endif %}"
+          >
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+          </li>
+          {% endfor %} {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+              >Próximo</a
+            >
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
     </main>
     <!-- End #main -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $("#searchInput").on("keyup", function() {
-                let value = $(this).val().toLowerCase();
-                $("#funcionarioList tr").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-                });
-            });
+      $(document).ready(function () {
+        $("#searchInput").on("keyup", function () {
+          let value = $(this).val().toLowerCase();
+          $("#funcionarioList tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+          });
         });
+      });
     </script>
 
     <!-- ======= Rodapé ======= -->
