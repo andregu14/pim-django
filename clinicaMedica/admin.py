@@ -45,11 +45,11 @@ class DentistaAdmin(UserAdmin):
     ordering = ('email',)
     fieldsets = (
         ('Autenticação', {'fields': ('email',)}),
-        ('Informações Pessoais', {'fields': ('nome', 'cpf', 'cargo', 'salario', 'especializacao')}),
+        ('Informações Pessoais', {'fields': ('nome', 'cpf', 'cargo', 'salario', 'especializacao', 'periodo_trabalho')}),
     )
     add_fieldsets = (
         ('Autenticação', {'fields': ('email',)}),
-        ('Informações Pessoais', {'fields': ('nome', 'cpf', 'cargo', 'salario', 'especializacao')}),
+        ('Informações Pessoais', {'fields': ('nome', 'cpf', 'cargo', 'salario', 'especializacao', 'periodo_trabalho')}),
     )
 
     list_filter = ('nome', 'cargo', 'date_joined')

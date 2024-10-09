@@ -368,7 +368,7 @@
         <li class="nav-item">
           <a
             href="#"
-            class="nav-link collapsed"
+            class="nav-link"
             data-bs-target="#consultas-nav"
             data-bs-toggle="collapse"
           >
@@ -378,7 +378,7 @@
           </a>
           <ul
             id="consultas-nav"
-            class="nav-content collapse"
+            class="nav-content"
             data-bs-parent="#sidebar-nav"
           >
             <li>
@@ -388,8 +388,8 @@
               </a>
             </li>
             <li>
-              <a href="{% url 'marcar-consultas' %}">
-                <i class="bi bi-circle-fill" style="color: #6c757d"></i>
+              <a href="{% url 'marcar-consultas' %}" class="active">
+                <i class="bi bi-calendar-plus" style="color: #fd7e14; font-size: 15px"></i>
                 <span>Marcar Consultas</span>
               </a>
             </li>
@@ -508,7 +508,7 @@
                       <select class="form-select" id="dentista" name="dentista" required>
                         <option value="">Escolha um dentista</option>
                         {% for dentista in dentistas %}
-                          <option value="{{ dentista.id }}">{{ dentista.nome }} - {{ dentista.especializacao }}</option>
+                          <option value="{{ dentista.id }}">{{ dentista.nome }} - {{ dentista.especializacao }} - {{ dentista.periodo_trabalho_maiusculo }}</option>
                         {% endfor %}
                       </select>
                     </div>
@@ -618,7 +618,9 @@
           container.empty();
           dates.forEach(function(date) {
             var dateObj = new Date(date);
-            var formattedDate = dateObj.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+            // Ajusta a data para UTC
+            var utcDate = new Date(dateObj.getUTCFullYear(), dateObj.getUTCMonth(), dateObj.getUTCDate());
+            var formattedDate = utcDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
             container.append('<div class="date-item" data-date="' + date + '">' + formattedDate + '</div>');
           });
         }

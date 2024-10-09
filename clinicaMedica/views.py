@@ -216,7 +216,7 @@ def get_datas_disponiveis(request):
     dentista = Dentista.objects.get(id=dentista_id)
     
     datas_disponiveis = []
-    data_atual = datetime.now().date() + timedelta(days=2) # pega a data atual e adiciona dois dias usando timedelta
+    data_atual = datetime.now().date() + timedelta(days=1) # pega a data atual e adiciona um dia usando timedelta
     
     for i in range(15):
         data = data_atual + timedelta(days=i)

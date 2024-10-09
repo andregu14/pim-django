@@ -31,7 +31,7 @@ class GestorCreationForm(forms.ModelForm):
 class DentistaCreationForm(forms.ModelForm):
     class Meta:
         model = Dentista
-        fields = ('email', 'nome', 'cpf', 'cargo', 'especializacao', 'salario')
+        fields = ('email', 'nome', 'cpf', 'cargo', 'especializacao', 'salario','periodo_trabalho')
 
     def save(self, commit=True):
         user = super().save(commit=False)

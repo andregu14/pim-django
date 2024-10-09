@@ -63,19 +63,19 @@ class Dentista(Funcionario):
     PERIODO_CHOICES = [
         ('matutino', 'Matutino'),
         ('vespertino', 'Vespertino'),
-        ('ambos', 'Ambos'),
+        ('diurno', 'Diurno'),
     ]
     especializacao = models.CharField(max_length=60)
-    periodo_trabalho = models.CharField(max_length=10, choices=PERIODO_CHOICES, default='ambos')
+    periodo_trabalho = models.CharField(max_length=10, choices=PERIODO_CHOICES, default='diurno')
 
     def get_horarios_disponiveis(self, data):
         horarios = []
-        if self.periodo_trabalho in ['matutino', 'ambos']:
+        if self.periodo_trabalho in ['matutino', 'diurno']:
             inicio = datetime.combine(data, datetime.min.time().replace(hour=7, minute=0))
             fim = datetime.combine(data, datetime.min.time().replace(hour=12, minute=0))
             horarios.extend(self._gerar_horarios(inicio, fim))
         
-        if self.periodo_trabalho in ['vespertino', 'ambos']:
+        if self.periodo_trabalho in ['vespertino', 'diurno']:
             inicio = datetime.combine(data, datetime.min.time().replace(hour=12, minute=10))
             fim = datetime.combine(data, datetime.min.time().replace(hour=19, minute=00))
             horarios.extend(self._gerar_horarios(inicio, fim))
@@ -89,10 +89,13 @@ class Dentista(Funcionario):
 
     def _gerar_horarios(self, inicio, fim):
         horarios = []
-        while inicio < fim:
+        while inicio <= fim:
             horarios.append(inicio)
             inicio += timedelta(minutes=10)
         return horarios
+    
+    def periodo_trabalho_maiusculo(self):
+        return self.periodo_trabalho.capitalize()
 
 class Recepcionista(Funcionario):
     pass
