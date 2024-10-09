@@ -31,4 +31,8 @@ urlpatterns = [
     path('funcionario/', views.funcionario, name='funcionario'),
     path('faq/', views.faq, name='faq'),
     path('contato/', views.contato, name='contato'),
+    path('marcar-consultas/', views.marcar_consultas, name='marcar-consultas'),
+    path('get-datas-disponiveis/', views.get_datas_disponiveis, name='get_datas_disponiveis'),
+    path('get-horarios-disponiveis/', views.get_horarios_disponiveis, name='get_horarios_disponiveis'),
+    path('verificar-paciente/', views.verificar_paciente, name='verificar_paciente'),
 ]

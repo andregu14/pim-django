@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.contrib.auth.hashers import make_password
 from django.utils import timezone
-from datetime import date
+from datetime import date, datetime, timedelta
 
 class FuncionarioManager(BaseUserManager):
     def create_user(self, email, cpf, nome, cargo, salario, password=None, **extra_fields):
@@ -60,7 +60,39 @@ class Funcionario(AbstractBaseUser, PermissionsMixin):
         return self.first_two_names()
 
 class Dentista(Funcionario):
+    PERIODO_CHOICES = [
+        ('matutino', 'Matutino'),
+        ('vespertino', 'Vespertino'),
+        ('ambos', 'Ambos'),
+    ]
     especializacao = models.CharField(max_length=60)
+    periodo_trabalho = models.CharField(max_length=10, choices=PERIODO_CHOICES, default='ambos')
+
+    def get_horarios_disponiveis(self, data):
+        horarios = []
+        if self.periodo_trabalho in ['matutino', 'ambos']:
+            inicio = datetime.combine(data, datetime.min.time().replace(hour=7, minute=0))
+            fim = datetime.combine(data, datetime.min.time().replace(hour=12, minute=0))
+            horarios.extend(self._gerar_horarios(inicio, fim))
+        
+        if self.periodo_trabalho in ['vespertino', 'ambos']:
+            inicio = datetime.combine(data, datetime.min.time().replace(hour=12, minute=10))
+            fim = datetime.combine(data, datetime.min.time().replace(hour=19, minute=00))
+            horarios.extend(self._gerar_horarios(inicio, fim))
+        
+        consultas_agendadas = Consulta.objects.filter(
+            medico_dentista=self,
+            data_hora__date=data
+        ).values_list('data_hora', flat=True)
+        
+        return [h for h in horarios if h not in consultas_agendadas]
+
+    def _gerar_horarios(self, inicio, fim):
+        horarios = []
+        while inicio < fim:
+            horarios.append(inicio)
+            inicio += timedelta(minutes=10)
+        return horarios
 
 class Recepcionista(Funcionario):
     pass
@@ -100,4 +132,4 @@ class Consulta(models.Model):
     medico_dentista = models.ForeignKey(Dentista, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Consulta {self.id_consulta} - {self.paciente.nome} com {self.medico_dentista.nome} em {self.data_hora}"
+        return f"Consulta {self.id} - {self.paciente.nome} com {self.medico_dentista.nome} em {self.data_hora}"

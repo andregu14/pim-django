@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
-from .models import Funcionario, Paciente
+from .models import Funcionario, Paciente, Dentista, Consulta
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 def validar_cpf(cpf):
     cpf = ''.join(filter(str.isdigit, cpf))
@@ -183,3 +184,64 @@ def faq(request):
 @login_required
 def contato(request):
     return render(request, 'pages-contact.html')
+
+@login_required
+def marcar_consultas(request):
+    if request.method == 'POST':
+        dentista_id = request.POST.get('dentista')
+        data = request.POST.get('data')
+        hora = request.POST.get('hora')
+        paciente_cpf = request.POST.get('paciente_cpf')
+
+        dentista = Dentista.objects.get(id=dentista_id)
+        paciente = Paciente.objects.get(cpf=paciente_cpf)
+        data_hora = datetime.strptime(f"{data} {hora}", "%Y-%m-%d %H:%M")
+
+        consulta = Consulta(
+            data_hora=data_hora,
+            status='agendada',
+            paciente=paciente,
+            medico_dentista=dentista
+        )
+        consulta.save()
+
+        return JsonResponse({'status': 'success', 'message': 'Consulta agendada com sucesso!'})
+
+    dentistas = Dentista.objects.all()
+    return render(request, 'marcar-consultas.html', {'dentistas': dentistas})
+
+@login_required
+def get_datas_disponiveis(request):
+    dentista_id = request.GET.get('dentista_id')
+    dentista = Dentista.objects.get(id=dentista_id)
+    
+    datas_disponiveis = []
+    data_atual = datetime.now().date() + timedelta(days=2) # pega a data atual e adiciona dois dias usando timedelta
+    
+    for i in range(15):
+        data = data_atual + timedelta(days=i)
+        if dentista.get_horarios_disponiveis(data):
+            datas_disponiveis.append(data.strftime("%Y-%m-%d"))
+    
+    return JsonResponse({'datas': datas_disponiveis})
+
+@login_required
+def get_horarios_disponiveis(request):
+    dentista_id = request.GET.get('dentista_id')
+    data = request.GET.get('data')
+    
+    dentista = Dentista.objects.get(id=dentista_id)
+    data_obj = datetime.strptime(data, "%Y-%m-%d").date()
+    
+    horarios_disponiveis = [h.strftime("%H:%M") for h in dentista.get_horarios_disponiveis(data_obj)]
+    
+    return JsonResponse({'horarios': horarios_disponiveis})
+
+@login_required
+def verificar_paciente(request):
+    cpf = request.GET.get('cpf')
+    try:
+        paciente = Paciente.objects.get(cpf=cpf)
+        return JsonResponse({'status': 'success', 'nome': paciente.nome})
+    except Paciente.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': 'Paciente não encontrado'})

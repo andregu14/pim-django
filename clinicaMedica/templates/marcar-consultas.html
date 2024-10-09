@@ -1,16 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Components / Accordion - NiceAdmin Bootstrap Template</title>
+    <title>Marcar Consultas</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon" />
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+    <link href="{% static 'img/favicon.png' %}" rel="icon" />
+    <link
+      href="{% static 'img/apple-touch-icon.png' %}"
+      rel="apple-touch-icon"
+    />
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
@@ -21,21 +25,33 @@
 
     <!-- Vendor CSS Files -->
     <link
-      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
       rel="stylesheet"
     />
     <link
-      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}"
       rel="stylesheet"
     />
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" />
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+    <link
+      href="{% static 'vendor/boxicons/css/boxicons.min.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'vendor/quill/quill.snow.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'vendor/quill/quill.bubble.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/remixicon/remixicon.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/simple-datatables/style.css' %}"
+      rel="stylesheet"
+    />
 
     <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
 
     <!-- =======================================================
   * Template Name: NiceAdmin
@@ -51,7 +67,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
         <a href="{% url 'dashboard' %}" class="logo d-flex align-items-center">
-          <img src="assets/img/logo.png" alt="" />
+          <img src="{% static 'img/logo.png' %}" alt="" />
           <span class="d-none d-lg-block">OdontoSmart</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -189,7 +205,7 @@
               <li class="message-item">
                 <a href="#">
                   <img
-                    src="assets/img/messages-1.jpg"
+                    src="{% static 'img/messages-1.jpg' %}"
                     alt=""
                     class="rounded-circle"
                   />
@@ -207,7 +223,7 @@
               <li class="message-item">
                 <a href="#">
                   <img
-                    src="assets/img/messages-2.jpg"
+                    src="{% static 'img/messages-2.jpg' %}"
                     alt=""
                     class="rounded-circle"
                   />
@@ -225,7 +241,7 @@
               <li class="message-item">
                 <a href="#">
                   <img
-                    src="assets/img/messages-3.jpg"
+                    src="{% static 'img/messages-3.jpg' %}"
                     alt=""
                     class="rounded-circle"
                   />
@@ -255,7 +271,7 @@
               data-bs-toggle="dropdown"
             >
               <img
-                src="assets/img/profile-img.png"
+                src="{% static 'img/profile-img.png' %}"
                 alt="Perfil"
                 class="rounded-circle"
               />
@@ -466,12 +482,13 @@
 
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Blank Page</h1>
+        <h1>Marcar Consultas</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
-            <li class="breadcrumb-item">Pages</li>
-            <li class="breadcrumb-item active">Blank</li>
+            <li class="breadcrumb-item">
+              <a href="{% url 'dashboard' %}">Início</a>
+            </li>
+            <li class="breadcrumb-item active">Marcar Consultas</li>
           </ol>
         </nav>
       </div>
@@ -479,26 +496,55 @@
 
       <section class="section">
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Example Card</h5>
-                <p>
-                  This is an examle page with no contrnt. You can use it as a
-                  starter for your custom pages.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Example Card</h5>
-                <p>
-                  This is an examle page with no contrnt. You can use it as a
-                  starter for your custom pages.
-                </p>
+                <h5 class="card-title">Agendar Nova Consulta</h5>
+                <form id="marcacaoForm">
+                  {% csrf_token %}
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="dentista" class="form-label">Selecione o Dentista</label>
+                      <select class="form-select" id="dentista" name="dentista" required>
+                        <option value="">Escolha um dentista</option>
+                        {% for dentista in dentistas %}
+                          <option value="{{ dentista.id }}">{{ dentista.nome }} - {{ dentista.especializacao }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-12">
+                      <label class="form-label">Selecione a Data</label>
+                      <div id="datas-disponiveis" class="date-grid"></div>
+                      <input type="hidden" id="data" name="data" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-12">
+                      <label class="form-label">Selecione o Horário</label>
+                      <div id="horarios-disponiveis" class="time-grid"></div>
+                      <input type="hidden" id="hora" name="hora" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="paciente_cpf" class="form-label">CPF do Paciente</label>
+                      <input type="text" class="form-control" id="paciente_cpf" name="paciente_cpf" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="paciente_nome" class="form-label">Nome do Paciente</label>
+                      <input type="text" class="form-control" id="paciente_nome" readonly>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Agendar Consulta</button>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
@@ -530,16 +576,123 @@
     ></a>
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="assets/vendor/echarts/echarts.min.js"></script>
-    <script src="assets/vendor/quill/quill.js"></script>
-    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="{% static 'vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/chart.js/chart.umd.js' %}"></script>
+    <script src="{% static 'vendor/echarts/echarts.min.js' %}"></script>
+    <script src="{% static 'vendor/quill/quill.js' %}"></script>
+    <script src="{% static 'vendor/simple-datatables/simple-datatables.js' %}"></script>
+    <script src="{% static 'vendor/tinymce/tinymce.min.js' %}"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+      $(document).ready(function() {
+        $('#dentista').change(function() {
+          var dentistaId = $(this).val();
+          if (dentistaId) {
+            $.ajax({
+              url: '{% url "get_datas_disponiveis" %}',
+              data: {'dentista_id': dentistaId},
+              success: function(response) {
+                renderDates(response.datas);
+              },
+              error: function(xhr, status, error) {
+                console.error("Erro ao buscar datas disponíveis:", error);
+                alert("Ocorreu um erro ao buscar as datas disponíveis. Por favor, tente novamente.");
+              }
+            });
+          } else {
+            $('#datas-disponiveis').empty();
+            $('#horarios-disponiveis').empty();
+          }
+        });
+      
+        function renderDates(dates) {
+          var container = $('#datas-disponiveis');
+          container.empty();
+          dates.forEach(function(date) {
+            var dateObj = new Date(date);
+            var formattedDate = dateObj.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+            container.append('<div class="date-item" data-date="' + date + '">' + formattedDate + '</div>');
+          });
+        }
+      
+        $(document).on('click', '.date-item', function() {
+          $('.date-item').removeClass('selected');
+          $(this).addClass('selected');
+          var selectedDate = $(this).data('date');
+          $('#data').val(selectedDate);
+          
+          var dentistaId = $('#dentista').val();
+          $.ajax({
+            url: '{% url "get_horarios_disponiveis" %}',
+            data: {'dentista_id': dentistaId, 'data': selectedDate},
+            success: function(response) {
+              renderTimes(response.horarios);
+            },
+            error: function(xhr, status, error) {
+              console.error("Erro ao buscar horários disponíveis:", error);
+              alert("Ocorreu um erro ao buscar os horários disponíveis. Por favor, tente novamente.");
+            }
+          });
+        });
+      
+        function renderTimes(times) {
+          var container = $('#horarios-disponiveis');
+          container.empty();
+          times.forEach(function(time) {
+            container.append('<div class="time-item" data-time="' + time + '">' + time + '</div>');
+          });
+        }
+      
+        $(document).on('click', '.time-item', function() {
+          $('.time-item').removeClass('selected');
+          $(this).addClass('selected');
+          var selectedTime = $(this).data('time');
+          $('#hora').val(selectedTime);
+        });
+      
+        $('#paciente_cpf').blur(function() {
+          var cpf = $(this).val();
+          if (cpf) {
+            $.ajax({
+              url: '{% url "verificar_paciente" %}',
+              data: {'cpf': cpf},
+              success: function(response) {
+                if (response.status === 'success') {
+                  $('#paciente_nome').val(response.nome);
+                } else {
+                  alert(response.message);
+                  $('#paciente_nome').val('');
+                }
+              }
+            });
+          }
+        });
+      
+        $('#marcacaoForm').submit(function(e) {
+          e.preventDefault();
+          $.ajax({
+            url: '{% url "marcar-consultas" %}',
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+              if (response.status === 'success') {
+                alert(response.message);
+                location.reload();
+              } else {
+                alert('Erro ao agendar consulta. Por favor, tente novamente.');
+              }
+            }
+          });
+        });
+      });
+      </script>
   </body>
 </html>
