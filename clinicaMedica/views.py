@@ -93,16 +93,24 @@ def perfil(request):
 
 @login_required
 def procurar_paciente(request):
-    pacientes_list = Paciente.objects.all()
-    paginator = Paginator(pacientes_list, 12)  # Mostra 10 pacientes por página
-
+    query = request.GET.get('procurar')
+    if query:
+        lista_de_pacientes = Paciente.objects.filter(
+            nome__icontains=query
+            ).union(
+                Paciente.objects.filter(cpf__icontains=query)
+            ).order_by('-id')
+    else:
+        lista_de_pacientes = Paciente.objects.all().order_by('-id')  # Ordena os pacientes pelo id em ordem decrescente
+        
+    paginator = Paginator(lista_de_pacientes, 12)  # Mostra até 12 pacientes por página
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'procurar-paciente.html', {'page_obj': page_obj})
+    return render(request, 'procurar-paciente.html', {'page_obj': page_obj, 'query':query})
 
 @login_required
 def cadastrar_paciente(request):
-    if request.method == 'POST':
+    if request.method == 'POST':    
         cpf = request.POST.get('cpf')
         nome = request.POST.get('nome')
         email = request.POST.get('email')
@@ -153,12 +161,20 @@ def cadastrar_paciente(request):
 
 @login_required
 def funcionario(request):
-    funcionarios_list = Funcionario.objects.all()
-    paginator = Paginator(funcionarios_list, 10)  # Mostra 10 funcionarios por página
+    query = request.GET.get('procurar')
+    if query:
+        lista_de_funcionarios = Funcionario.objects.filter(
+            nome__icontains=query
+            ).union(
+                Funcionario.objects.filter(cpf__icontains=query)
+            ).order_by('-id')
+    else:
+        lista_de_funcionarios = Funcionario.objects.all().order_by('-id')  # Ordena os pacientes pelo id em ordem decrescente
 
+    paginator = Paginator(lista_de_funcionarios, 10)  # Mostra 10 até funcionarios por página
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'pages.funcionario.html', {'page_obj': page_obj})
+    return render(request, 'pages.funcionario.html', {'page_obj': page_obj, 'query':query})
 
 @login_required
 def faq(request):

@@ -20,7 +20,7 @@ class FuncionarioManager(BaseUserManager):
         return self.create_user(email, cpf, nome, cargo, salario, password, **extra_fields)
 
 class Funcionario(AbstractBaseUser, PermissionsMixin):
-    cpf = models.CharField(max_length=11, unique=True)
+    cpf = models.CharField(max_length=14, unique=True)
     email = models.EmailField(unique=True, blank=False)
     salario = models.DecimalField(max_digits=10, decimal_places=2)
     cargo = models.CharField(max_length=50)
@@ -75,7 +75,7 @@ class Gestor(Funcionario):
         return self.nome
 
 class Paciente(models.Model):
-    cpf = models.CharField(max_length=11, unique=True)
+    cpf = models.CharField(max_length=14, unique=True)
     nome = models.CharField(max_length=50, blank=False)
     email = models.EmailField(unique=True, blank=False)
     telefone = models.CharField(max_length=50, blank=False)
@@ -83,7 +83,7 @@ class Paciente(models.Model):
     data_de_nascimento = models.DateField(verbose_name="Data de Nascimento", blank=False)
     sexo = models.CharField(max_length=9, blank=False)
     estado = models.CharField(max_length=50, blank=False)
-    cep = models.CharField(max_length=9, blank=False)
+    cep = models.CharField(max_length=9, blank=True)
     date_joined = models.DateTimeField(verbose_name="Data do Cadastro", default=timezone.now)
 
     def calcular_idade(self):
