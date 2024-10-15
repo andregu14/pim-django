@@ -194,10 +194,12 @@ def marcar_consultas(request):
         data = request.POST.get('data')
         hora = request.POST.get('hora')
         paciente_cpf = request.POST.get('paciente_cpf')
+        servico_id = request.POST.get('servico')
 
         try:
             dentista = Dentista.objects.get(id=dentista_id)
             paciente = Paciente.objects.get(cpf=paciente_cpf)
+            servico = Servico.objects.get(id=servico_id)
             
             # Combinar data e hora e adicionar informação de fuso horário
             data_hora_str = f"{data} {hora}"
@@ -210,17 +212,20 @@ def marcar_consultas(request):
                 data_hora=data_hora,
                 status='agendada',
                 paciente=paciente,
-                medico_dentista=dentista
+                medico_dentista=dentista,
+                servico=servico,
             )
             consulta.save()
             messages.success(request, 'Consulta agendada com sucesso!')
+
         except ValidationError as e:
             messages.error(request, 'Erro ao agendar consulta', 'danger')
         except Exception as e:
             messages.error(request, 'Erro ao agendar consulta', 'danger')
 
     dentistas = Dentista.objects.all()
-    return render(request, 'marcar-consultas.html', {'dentistas': dentistas})
+    servicos = Servico.objects.all()
+    return render(request, 'marcar-consultas.html', {'dentistas': dentistas, 'servicos': servicos})
 
 @login_required
 def get_datas_disponiveis(request):

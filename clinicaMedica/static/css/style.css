@@ -1171,31 +1171,6 @@ h6 {
 /*--------------------------------------------------------------
 # Marcar Consultas
 --------------------------------------------------------------*/
-.date-grid, .time-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 10px;
-  margin-top: 10px;
-}
-.date-item, .time-item {
-  padding: 10px;
-  text-align: center;
-  border: 1px solid #ddd;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.date-item:hover, .time-item:hover {
-  background-color: #f0f0f0;
-}
-.date-item.selected, .time-item.selected {
-  background-color: #007bff;
-  color: white;
-}
-.date-item.disabled, .time-item.disabled {
-  background-color: #f0f0f0;
-  color: #999;
-  cursor: not-allowed;
-}
 
 .fc-event {
   cursor: pointer;
@@ -1204,6 +1179,21 @@ h6 {
 .fc .fc-highlight {
   background-color: #ffeb3b8f;
   border-color: #ffeb3b;
+}
+
+.time-slot-btn {
+  width: calc(25% - 10px);
+  margin: 5px;
+}
+
+#timeSlotButtons {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
 }
  
 /*--------------------------------------------------------------

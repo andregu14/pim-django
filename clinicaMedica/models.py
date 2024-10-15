@@ -144,11 +144,19 @@ class Paciente(models.Model):
     def __str__(self):
         return self.nome
 
+class Servico(models.Model):
+    nome = models.CharField(max_length=40, verbose_name="Serviço", blank=False)
+    valor = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.nome
+
 class Consulta(models.Model):
     data_hora = models.DateTimeField(verbose_name="Data e Hora", blank=False)
     status = models.CharField(max_length=20)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     medico_dentista = models.ForeignKey(Dentista, on_delete=models.CASCADE)
+    servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ('data_hora', 'medico_dentista')
@@ -164,11 +172,3 @@ class Consulta(models.Model):
         
     def __str__(self):
         return f"Consulta {self.id} - {self.paciente.nome} com {self.medico_dentista.nome} em {localtime(self.data_hora).strftime('%d-%m-%Y %H:%M:%S')}"
-
-
-class Servico(models.Model):
-    nome = models.CharField(max_length=40, verbose_name="Serviço", blank=False)
-    valor = models.DecimalField(max_digits=10, decimal_places=2)
-
-    def __str__(self):
-        return self.nome

@@ -522,79 +522,79 @@
                   ></button>
                 </div>
                 {% endfor %} {% endif %}
-                <form id="marcacaoForm" method="post">
+                <form id="marcacaoForm" method="post" class="row g-5">
                   {% csrf_token %}
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <label for="dentista" class="form-label"
-                        >Selecione o Dentista</label
-                      >
-                      <select
-                        class="form-select"
-                        id="dentista"
-                        name="dentista"
-                        required
-                      >
-                        <option value="">Escolha um dentista</option>
-                        {% for dentista in dentistas %}
-                        <option value="{{ dentista.id }}">
-                          {{ dentista.nome }} - {{ dentista.especializacao }} -
-                          {{ dentista.periodo_trabalho|capfirst }}
-                        </option>
-                        {% endfor %}
-                      </select>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="paciente_cpf" class="form-label"
-                        >CPF do Paciente</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="paciente_cpf"
-                        name="paciente_cpf"
-                        required
-                      />
-                    </div>
+                  <div class="col-md-6">
+                    <label for="dentista" class="form-label"
+                      >Selecione o Dentista</label
+                    >
+                    <select
+                      class="form-select"
+                      id="dentista"
+                      name="dentista"
+                      required
+                    >
+                      <option value="">Escolha um dentista</option>
+                      {% for dentista in dentistas %}
+                      <option value="{{ dentista.id }}">
+                        {{ dentista.nome }} - {{ dentista.especializacao }} - {{ dentista.periodo_trabalho|capfirst }}
+                      </option>
+                      {% endfor %}
+                    </select>
                   </div>
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <label for="paciente_nome" class="form-label"
-                        >Nome do Paciente</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="paciente_nome"
-                        readonly
-                      />
-                    </div>
+                  <div class="col-md-6">
+                    <label for="servico" class="form-label"
+                      >Selecione o Serviço</label
+                    >
+                    <select
+                      class="form-select"
+                      id="servico"
+                      name="servico"
+                      required
+                    >
+                      <option value="">Escolha um Serviço</option>
+                      {% for servico in servicos %}
+                      <option value="{{ servico.id }}">
+                        {{ servico.nome|capfirst }} - R${{ servico.valor }}
+                      </option>
+                      {% endfor %}
+                    </select>
                   </div>
-                  <div class="row mb-3">
-                    <div class="col-12">
+                  <div class="col-md-6">
+                    <label for="paciente_cpf" class="form-label"
+                      >CPF do Paciente</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="paciente_cpf"
+                      name="paciente_cpf"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="paciente_nome" class="form-label"
+                      >Nome do Paciente</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="paciente_nome"
+                      readonly
+                    />
+                  </div>
+                    <div class="text-center">
                       <button
                         type="button"
                         id="openCalendarModal"
                         class="btn btn-primary"
-                      >
-                        Ver Horários Disponíveis
-                      </button>
-                    </div>
-                  </div>
-                  <input type="hidden" id="data" name="data" />
-                  <input type="hidden" id="hora" name="hora" />
-                  <div class="row mt-3">
-                    <div class="col-12">
-                      <button
-                        type="submit"
-                        class="btn btn-primary"
-                        id="confirmConsulta"
                         disabled
                       >
-                        Agendar Consulta
+                        Continuar
                       </button>
                     </div>
-                  </div>
+                  <input type="hidden" id="data" name="data" />
+                  <input type="hidden" id="hora" name="hora" />
                 </form>
               </div>
             </div>
@@ -612,7 +612,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="calendarModalLabel">
-                  Selecionar Data e Horário
+                  Selecionar Data
                 </h5>
                 <button
                   type="button"
@@ -623,10 +623,6 @@
               </div>
               <div class="modal-body">
                 <div id="calendar" style="height: 600px"></div>
-                <div id="timeSlots" class="mt-3" style="display: none">
-                  <h6>Horários Disponíveis:</h6>
-                  <div id="timeSlotButtons"></div>
-                </div>
               </div>
               <div class="modal-footer">
                 <button
@@ -636,13 +632,89 @@
                 >
                   Fechar
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- modal para horários -->
+        <div
+          class="modal fade"
+          id="horariosModal"
+          tabindex="-1"
+          aria-labelledby="horariosModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="horariosModalLabel">
+                  Selecionar Horário
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div id="timeSlots">
+                  <div id="timeSlotButtons" class="d-flex flex-wrap"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- modal para overview -->
+        <div
+          class="modal fade"
+          id="overviewModal"
+          tabindex="-1"
+          aria-labelledby="overviewModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="overviewModalLabel">
+                  Confirmar Consulta
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <p>
+                  <strong>Dentista:</strong> <span id="overviewDentista"></span>
+                </p>
+                <p>
+                  <strong>Serviço:</strong> <span id="overviewServico"></span>
+                </p>
+                <p>
+                  <strong>Paciente:</strong> <span id="overviewPaciente"></span>
+                </p>
+                <p><strong>Data:</strong> <span id="overviewData"></span></p>
+                <p>
+                  <strong>Horário:</strong> <span id="overviewHorario"></span>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
                 <button
                   type="button"
                   class="btn btn-primary"
-                  id="confirmDateTime"
-                  disabled
+                  id="confirmarConsulta"
                 >
-                  Confirmar
+                  Confirmar Agendamento
                 </button>
               </div>
             </div>
@@ -752,12 +824,14 @@
         });
         calendar.render();
 
-        // Abrir modal e renderizar calendário
+        // Abrir modal do calendário
         document
           .getElementById("openCalendarModal")
           .addEventListener("click", function () {
             var dentistaId = document.getElementById("dentista").value;
-            if (!dentistaId) {
+            var servicoId = document.getElementById("servico").value;
+            var pacienteCpf = document.getElementById("paciente_cpf").value;
+            if (!dentistaId || !servicoId || !pacienteCpf) {
               alert("Por favor, selecione um dentista primeiro.");
               return;
             }
@@ -796,7 +870,15 @@
                 button.onclick = selectTimeSlot;
                 timeSlotButtonsEl.appendChild(button);
               });
-              timeSlotsEl.style.display = "block";
+
+              // Fechar modal do calendário e abrir modal de horários
+              bootstrap.Modal.getInstance(
+                document.getElementById("calendarModal")
+              ).hide();
+              new bootstrap.Modal(
+                document.getElementById("horariosModal")
+              ).show();
+
               document.getElementById("data").value = date;
             })
             .catch((error) =>
@@ -811,19 +893,39 @@
             .forEach((btn) => btn.classList.remove("active"));
           event.target.classList.add("active");
           document.getElementById("hora").value = event.target.dataset.time;
-          document.getElementById("confirmDateTime").disabled = false;
+
+          // Fechar modal de horários e abrir modal de overview
+          bootstrap.Modal.getInstance(
+            document.getElementById("horariosModal")
+          ).hide();
+          showOverview();
         }
 
-        // Confirmar seleção de data e hora
-        document
-          .getElementById("confirmDateTime")
-          .addEventListener("click", function () {
-            var modal = bootstrap.Modal.getInstance(
-              document.getElementById("calendarModal")
-            );
-            modal.hide();
-            document.getElementById("confirmConsulta").disabled = false;
-          });
+        // Mostrar overview
+        function showOverview() {
+          var dentista = document.getElementById("dentista");
+          var servico = document.getElementById("servico")
+          var pacienteCPF = document.getElementById("paciente_cpf");
+          var pacienteNome = document.getElementById("paciente_nome");
+          var data = document.getElementById("data").value;
+          var hora = document.getElementById("hora").value;
+
+          // Ajustar o formato da data
+          var partesData = data.split("-");
+          var dataFormatada =
+            partesData[2] + "/" + partesData[1] + "/" + partesData[0];
+
+          document.getElementById("overviewDentista").textContent =
+            dentista.options[dentista.selectedIndex].text;
+          document.getElementById("overviewServico").textContent =
+            servico.options[servico.selectedIndex].text;  
+          document.getElementById("overviewPaciente").textContent =
+            pacienteNome.value;
+          document.getElementById("overviewData").textContent = dataFormatada;
+          document.getElementById("overviewHorario").textContent = hora;
+
+          new bootstrap.Modal(document.getElementById("overviewModal")).show();
+        }
 
         // Atualizar calendário ao mudar o dentista
         document
@@ -832,6 +934,14 @@
             calendar.refetchEvents();
           });
       });
+
+      // Confirmar agendamento
+      document
+        .getElementById("confirmarConsulta")
+        .addEventListener("click", function () {
+          document.getElementById("marcacaoForm").submit();
+        });
+
       // Preenche o nome do paciente ao digitar o cpf
       $("#paciente_cpf").blur(function () {
         var cpf = $(this).val();
@@ -877,6 +987,30 @@
               (x[3] ? "." + x[3] : "") +
               (x[4] ? "-" + x[4] : "");
         });
+    </script>
+    <script>
+      // Ativa o botao de confirmar quando todos os campos forem preenchidos
+      document.addEventListener('DOMContentLoaded', function() {
+        const dentistaSelect = document.getElementById('dentista');
+        const servicoSelect = document.getElementById('servico');
+        const pacienteCpfInput = document.getElementById('paciente_cpf');
+        const continuarButton = document.getElementById('openCalendarModal');
+    
+        function checkFields() {
+          if (dentistaSelect.value && servicoSelect.value && pacienteCpfInput.value.length >= 14) {
+            continuarButton.disabled = false;
+          } else {
+            continuarButton.disabled = true;
+          }
+        }
+    
+        dentistaSelect.addEventListener('change', checkFields);
+        servicoSelect.addEventListener('change', checkFields);
+        pacienteCpfInput.addEventListener('input', checkFields);
+    
+        // Chamada inicial para garantir o estado correto do botão
+        checkFields();
+      });
     </script>
   </body>
 </html>
