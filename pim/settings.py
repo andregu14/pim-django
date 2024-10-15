@@ -116,6 +116,7 @@ AUTH_USER_MODEL = 'clinicaMedica.Funcionario'
 
 LANGUAGE_CODE = 'pt-br'
 
+USE_TZ = True
 TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True

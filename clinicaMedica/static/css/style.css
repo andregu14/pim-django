@@ -1196,6 +1196,16 @@ h6 {
   color: #999;
   cursor: not-allowed;
 }
+
+.fc-event {
+  cursor: pointer;
+}
+
+.fc .fc-highlight {
+  background-color: #ffeb3b8f;
+  border-color: #ffeb3b;
+}
+ 
 /*--------------------------------------------------------------
 # Lista de Funcionarios
 --------------------------------------------------------------*/

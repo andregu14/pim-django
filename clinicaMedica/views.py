@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Funcionario, Paciente, Dentista, Consulta
+from .models import Funcionario, Paciente, Dentista, Consulta, Servico
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -8,6 +8,8 @@ from django.db import IntegrityError
 from datetime import datetime, timedelta
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from django.utils import timezone
+from django.core.exceptions import ValidationError
 
 def validar_cpf(cpf):
     cpf = ''.join(filter(str.isdigit, cpf))
@@ -193,19 +195,29 @@ def marcar_consultas(request):
         hora = request.POST.get('hora')
         paciente_cpf = request.POST.get('paciente_cpf')
 
-        dentista = Dentista.objects.get(id=dentista_id)
-        paciente = Paciente.objects.get(cpf=paciente_cpf)
-        data_hora = datetime.strptime(f"{data} {hora}", "%Y-%m-%d %H:%M")
+        try:
+            dentista = Dentista.objects.get(id=dentista_id)
+            paciente = Paciente.objects.get(cpf=paciente_cpf)
+            
+            # Combinar data e hora e adicionar informação de fuso horário
+            data_hora_str = f"{data} {hora}"
+            data_hora_naive = datetime.strptime(data_hora_str, "%Y-%m-%d %H:%M")
+            data_hora = timezone.make_aware(data_hora_naive)
 
-        consulta = Consulta(
-            data_hora=data_hora,
-            status='agendada',
-            paciente=paciente,
-            medico_dentista=dentista
-        )
-        consulta.save()
+            print(data_hora)
 
-        return JsonResponse({'status': 'success', 'message': 'Consulta agendada com sucesso!'})
+            consulta = Consulta(
+                data_hora=data_hora,
+                status='agendada',
+                paciente=paciente,
+                medico_dentista=dentista
+            )
+            consulta.save()
+            messages.success(request, 'Consulta agendada com sucesso!')
+        except ValidationError as e:
+            messages.error(request, 'Erro ao agendar consulta', 'danger')
+        except Exception as e:
+            messages.error(request, 'Erro ao agendar consulta', 'danger')
 
     dentistas = Dentista.objects.all()
     return render(request, 'marcar-consultas.html', {'dentistas': dentistas})
@@ -245,3 +257,7 @@ def verificar_paciente(request):
         return JsonResponse({'status': 'success', 'nome': paciente.nome})
     except Paciente.DoesNotExist:
         return JsonResponse({'status': 'error', 'message': 'Paciente não encontrado'})
+
+@login_required
+def teste(request):
+        return render(request, 'teste-calendario.html')
