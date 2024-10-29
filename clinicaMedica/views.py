@@ -235,10 +235,13 @@ def get_datas_disponiveis(request):
     datas_disponiveis = []
     data_atual = datetime.now().date() + timedelta(days=1) # pega a data atual e adiciona um dia usando timedelta
     
-    for i in range(15):
+    for i in range(30):
         data = data_atual + timedelta(days=i)
-        if dentista.get_horarios_disponiveis(data):
-            datas_disponiveis.append(data.strftime("%Y-%m-%d"))
+        if data.weekday() < 5: # 0-4 representa segunda a sexta
+            if dentista.get_horarios_disponiveis(data):
+                datas_disponiveis.append(data.strftime("%Y-%m-%d"))
+        if len(datas_disponiveis) == 15:  # Paramos quando tivermos 15 dias úteis
+            break
     
     return JsonResponse({'datas': datas_disponiveis})
 
@@ -264,5 +267,45 @@ def verificar_paciente(request):
         return JsonResponse({'status': 'error', 'message': 'Paciente não encontrado'})
 
 @login_required
-def teste(request):
-        return render(request, 'teste-calendario.html')
+def visualizar_consultas(request):
+    # Obter parâmetros de filtro
+    data = request.GET.get('data')
+    dentista_id = request.GET.get('dentista')
+    status = request.GET.get('status')
+    
+    # Iniciar queryset com todas as consultas
+    consultas = Consulta.objects.all().order_by('-data_hora')
+    
+    # Aplicar filtros se fornecidos
+    if data:
+        data_obj = datetime.strptime(data, '%Y-%m-%d').date()
+        consultas = consultas.filter(data_hora__date=data_obj)
+    
+    if dentista_id:
+        consultas = consultas.filter(medico_dentista_id=dentista_id)
+        
+    if status:
+        consultas = consultas.filter(status=status)
+    
+    # Paginação
+    paginator = Paginator(consultas, 8)  # 8 consultas por página
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    # Obter lista de dentistas para o filtro
+    dentistas = Dentista.objects.all()
+
+    # Construir a URL de paginação sem parâmetros com valor 'None' ou vazio
+    query_params = request.GET.copy()
+    query_params.pop('page', True)  # Remover 'page' se existir
+    
+    context = {
+        'page_obj': page_obj,
+        'dentistas': dentistas,
+        'selected_date': data,
+        'selected_dentista': dentista_id,
+        'selected_status': status,
+        'query_params': query_params.urlencode(),
+    }
+    
+    return render(request, 'visualizar-consultas.html', context,)

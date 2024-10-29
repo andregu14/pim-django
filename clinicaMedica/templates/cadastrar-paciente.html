@@ -385,8 +385,8 @@
             data-bs-parent="#sidebar-nav"
           >
             <li>
-              <a href="#">
-                <i class="bi bi-circle-fill" style="color: #6c757d"></i>
+              <a href="{% url 'visualizar_consultas' %}">
+                <i class="bi bi-search" style="color: #fd7e14; font-size: 15px"></i>
                 <span>Visualizar Consultas</span>
               </a>
             </li>
@@ -511,7 +511,7 @@
               <div class="card-body">
                 <h5 class="card-title">Cadastrar Paciente</h5>
                 <!-- Floating Labels Form -->
-                <form class="row g-3 needs-validation" novalidate method="post">
+                <form class="row g-4 needs-validation" novalidate method="post">
                   {% csrf_token %}
                   <div class="col-md-12">
                     <div class="form-floating">

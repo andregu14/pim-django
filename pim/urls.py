@@ -35,5 +35,5 @@ urlpatterns = [
     path('get-datas-disponiveis/', views.get_datas_disponiveis, name='get_datas_disponiveis'),
     path('get-horarios-disponiveis/', views.get_horarios_disponiveis, name='get_horarios_disponiveis'),
     path('verificar-paciente/', views.verificar_paciente, name='verificar_paciente'),
-    path('teste/', views.teste, name='teste'),
+    path('visualizar-consultas/', views.visualizar_consultas, name='visualizar_consultas'),
 ]
