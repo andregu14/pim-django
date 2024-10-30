@@ -523,41 +523,45 @@
           </div>
         </div>
       </div>
-      <div class="row" id="funcionarioList">
-        {% for funcionario in page_obj %}
-        <div class="col-lg-6 mb-3">
-          <div class="card funcionario-card">
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <img
-                  src="{% static 'img/profile-img.png' %}"
-                  alt="{{ funcionario.nome }}"
-                  class="funcionario-img me-4"
-                />
-                <div>
-                  <h5 class="card-title mb-1">{{ funcionario.nome }}</h5>
-                  <p class="card-text mb-1">
-                    <small class="text-muted"
-                      ><strong>CPF:</strong> {{ funcionario.cpf }}</small
-                    >
-                  </p>
-                  <p class="card-text mb-1">
-                    <small class="text-muted"
-                      ><strong>Email:</strong> {{ funcionario.email }}</small
-                    >
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted"
-                      ><strong>Cargo:</strong> {{ funcionario.cargo }}</small
-                    >
-                  </p>
+      <section class="card">
+        <div class="card-body">
+          <div class="row mt-5" id="funcionarioList">
+            {% for funcionario in page_obj %}
+            <div class="col-lg-6">
+              <div class="card funcionario-card">
+                <div class="card-body">
+                  <div class="d-flex align-items-center">
+                    <img
+                      src="{% static 'img/profile-img.png' %}"
+                      alt="{{ funcionario.nome }}"
+                      class="funcionario-img me-4"
+                    />
+                    <div>
+                      <h5 class="card-title mb-1">{{ funcionario.nome }}</h5>
+                      <p class="card-text mb-1">
+                        <small class="text-muted"
+                          ><strong>CPF:</strong> {{ funcionario.cpf }}</small
+                        >
+                      </p>
+                      <p class="card-text mb-1">
+                        <small class="text-muted"
+                          ><strong>Email:</strong> {{ funcionario.email }}</small
+                        >
+                      </p>
+                      <p class="card-text">
+                        <small class="text-muted"
+                          ><strong>Cargo:</strong> {{ funcionario.cargo }}</small
+                        >
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+            {% endfor %}
           </div>
         </div>
-        {% endfor %}
-      </div>
+      </section>
       <nav aria-label="Page navigation" class="pt-3">
         <ul class="pagination justify-content-center">
           {% if page_obj.has_previous %}

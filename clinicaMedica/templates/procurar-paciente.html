@@ -496,7 +496,7 @@
         </nav>
       </div>
 
-      <div class="row mb-4">
+      <div class="row mb-2">
         <div class="col">
           <div class="card">
             <div class="card-body">
@@ -524,32 +524,36 @@
         </div>
       </div>
 
-      <div class="row" id="patientList">
-        {% for paciente in page_obj %}
-        <div class="col-md-6 col-lg-4 mb-4">
-          <div class="card patient-card">
-            <div class="card-body">
-              <h5 class="card-title">{{ paciente.nome }}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">
-                CPF: {{ paciente.cpf }}
-              </h6>
-              <p class="card-text">
-                <small class="text-muted">
-                  <i class="bi bi-envelope me-2"></i>{{ paciente.email }}<br />
-                  <i class="bi bi-telephone me-2"></i>{{ paciente.telefone }}<br />
-                  <i class="bi bi-calendar me-2"></i>Idade: {{ paciente.calcular_idade }}
-                </small>
-              </p>
-              <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-outline-primary btn-sm"
-                  ><i class="bi bi-eye me-1"></i>Ver</a
-                >
+      <section class="card">
+        <div class="card-body">
+          <div class="row mt-5" id="patientList">
+            {% for paciente in page_obj %}
+            <div class="col-md-6 col-lg-4">
+              <div class="card patient-card">
+                <div class="card-body">
+                  <h5 class="card-title">{{ paciente.nome }}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    CPF: {{ paciente.cpf }}
+                  </h6>
+                  <p class="card-text">
+                    <small class="text-muted">
+                      <i class="bi bi-envelope me-2"></i>{{ paciente.email }}<br />
+                      <i class="bi bi-telephone me-2"></i>{{ paciente.telefone }}<br />
+                      <i class="bi bi-calendar me-2"></i>Idade: {{ paciente.calcular_idade }}
+                    </small>
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <a href="#" class="btn btn-outline-primary btn-sm"
+                      ><i class="bi bi-eye me-1"></i>Ver</a
+                    >
+                  </div>
+                </div>
               </div>
             </div>
+            {% endfor %}
           </div>
         </div>
-        {% endfor %}
-      </div>
+      </section>
 
       <nav aria-label="Navegação de página">
         <ul class="pagination justify-content-center">
